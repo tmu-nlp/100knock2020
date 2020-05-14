@@ -12,7 +12,8 @@ def char_n_gram(sent, n):
     charNGramList.append(str(charsent[i:i+n]))
   return set(charNGramList)
 
-sent = 'I am an NLPer'
+if __name__ == "__main__":     
+  sent = 'I am an NLPer'
 
-print(word_n_gram(sent, 2))
-print(char_n_gram(sent, 2))
+  print(word_n_gram(sent, 2))
+  print(char_n_gram(sent, 2))
