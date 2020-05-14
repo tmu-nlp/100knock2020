@@ -3,8 +3,11 @@
 
 if __name__ == "__main__":
     str = "パタトクカシーー"
-    ans = str[1::2]
-    print(ans)
+    ans1 = str[0::2]
+    ans2 = str[1::2]
+    print(f"{ans1=}")
+    print(f"{ans2=}")
 
 # 実行結果
-# タクシー
+# ans1='パトカー'
+# ans2='タクシー'

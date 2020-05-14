@@ -4,7 +4,7 @@
 if __name__ == "__main__":
     str = "stressed"
     ans = str[::-1]
-    print(ans)
+    print(f"{ans=}")
 
 # 実行結果
-# desserts
+# ans='desserts'
