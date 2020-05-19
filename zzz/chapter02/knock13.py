@@ -1,12 +1,10 @@
 import sys
+with open(sys.argv[1], 'r') as col1_file:
+    with open(sys.argv[2], 'r') as col2_file:
+        col1_2 = []
 
-col1_file = open(sys.argv[1], 'r')
-col2_file = open(sys.argv[2], 'r')
+        for col1, col2 in zip(col1_file, col2_file):
+            col1_2.append(col1.replace('\n', '') + '\t' + col2.replace('\n', ''))
 
-col1_2 = []
-
-for col1, col2 in zip(col1_file, col2_file):
-    col1_2.append(col1.replace('\n', '') + '\t' + col2.replace('\n', ''))
-
-col1_2_file = open('col1_2.txt', 'w')
-col1_2_file.write('\n'.join(col1_2))
+        with open('col1_2.txt', 'w') as col1_2_file:
+            col1_2_file.write('\n'.join(col1_2))
