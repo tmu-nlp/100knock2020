@@ -1,3 +1,2 @@
 word = 'パタトクカシーー'
-ans = word[::2]
-print(ans)
+print(word[1::2])

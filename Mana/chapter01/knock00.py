@@ -1,1 +1,2 @@
-#this is a test.
+word = 'stressed'
+print(word[::-1])
