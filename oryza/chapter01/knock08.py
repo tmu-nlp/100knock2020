@@ -15,8 +15,8 @@ def cipher(sent):
     cip = []
     for i in sent:
         if i == 'c':
-            char = chr(219-ord(c))
-        elif i == chr(219-ord(c)):
+            char = chr(219-ord('c'))
+        elif i == chr(219-ord('c')):
             char = 'c'
         else:
             char = i
@@ -27,10 +27,10 @@ def cipher(sent):
 def decipher(sent):
     decip = []
     for i in sent:
-        if i == chr(219-ord(c)):
+        if i == chr(219-ord('c')):
             char = 'c'
         elif i == 'c':
-            char = chr(219-ord(c))
+            char = chr(219-ord('c'))
         else:
             char = i
         decip.append(char)

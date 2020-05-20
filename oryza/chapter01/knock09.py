@@ -17,18 +17,18 @@ understand what I was reading : the phenomenal power of the human mind .”
 import random
 
 sentence = "I couldn’t believe that I could actually understand what I was reading : the phenomenal power of the human mind ."
-words = s.split(' ')
 
 def typoglycemia(sent):
     glyce = []
+    words = sent.split(' ')
     for w in words:
         if len(w)<=4:
-            tok = w
+            temp = w
         else:
             toShuf = w[1:len(w)-1]
-            inShuffle = random.sample(to_shuf,k=len(toShuf))
-            tok = w[0] + ''.join(in_shuffle) + w[-1]
-        glyce.append(tok)
+            shuffling = random.sample(toShuf,k=len(toShuf))
+            temp = w[0] + ''.join(shuffling) + w[-1]
+        glyce.append(temp)
     return ' '.join(glyce)
 
-typoglycemia(sentence)
+print(typoglycemia(sentence))
