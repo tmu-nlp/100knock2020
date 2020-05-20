@@ -32,6 +32,7 @@ $ git push origin master
 chapter##/knockXX.py のフォルダ名とファイル名を間違えると進捗グラフに反映されません。
 
 ## みんなの進捗
+![progress](https://github.com/tmu-nlp/100knock2020/blob/master/progress.png)
 
 
 # 100knock2020 (English)  
