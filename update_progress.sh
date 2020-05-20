@@ -9,7 +9,6 @@ git config --global user.name $name
 git config --global user.email $email
 
 git remote set-url origin https://${name}:${GITHUB_TOKEN}@github.com/tmu-nlp/100knock2020.git
-git checkout -b master
 
 last_commit_msg="$(git log -1 | tail -1)"
 
