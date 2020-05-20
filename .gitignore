@@ -134,3 +134,7 @@ dmypy.json
 
 # nohup
 nohup.out
+/zzz/chapter02/popular-names.txt
+/zzz/chapter02/col2.txt
+/zzz/chapter02/col1.txt
+/zzz/chapter02/col1_2.txt
