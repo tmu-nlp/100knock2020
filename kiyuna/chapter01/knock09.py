@@ -13,6 +13,8 @@ https://nlp100.github.io/ja/ch01.html#09-typoglycemia
 [Ref]
 - タイポグリセミア
     - https://ja.wikipedia.org/wiki/タイポグリセミア
+- 任意引数リスト
+    - https://docs.python.org/ja/3.6/tutorial/controlflow.html#arbitrary-argument-lists
 
 [Usage]
 python knock09.py
@@ -37,9 +39,9 @@ if __name__ == "__main__":
         res = []
         for word in sent.split(" "):
             if len(word) > 4:
-                head, *middle, tail = word
-                random.shuffle(middle)
-                word = head + "".join(middle) + tail
+                head, *body, tail = list(word)
+                random.shuffle(body)
+                word = head + "".join(body) + tail
             res.append(word)
         out.result("plain", sent)
         out.result("result", " ".join(res))

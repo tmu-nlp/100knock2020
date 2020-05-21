@@ -62,8 +62,11 @@ def message(
 
 
 class Renderer(object):
+    title: str
+    cnt: int
+
     def __init__(self, title: str) -> None:
-        self.title: str = title
+        self.title = title
         self.cnt = 1
 
     def __enter__(self) -> Type["Renderer"]:
