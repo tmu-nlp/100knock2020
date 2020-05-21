@@ -1,5 +1,6 @@
 def encode(s):
-    return ''.join([chr(219 - ord(c)) if 'a' <= c <= 'z'else c for c in s])
+    return ''.join([chr(219 - ord(c)) if 'a' <= c <= 'z' else c for c in s])
+
 
 if __name__ == '__main__':
     s = 'I am a NLPer.'
