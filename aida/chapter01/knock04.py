@@ -4,11 +4,11 @@ sentence = 'Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Mig
 words_fixed = del_punct(sentence)
 
 ans = {}
-for i in range(len(words_fixed)):
-    if i in set([0, 4, 5, 6, 7, 8, 14, 15, 18]):
-        word = words_fixed[i][:1]
+for i, word in enumerate(words_fixed, start=1):
+    if i in set([1, 5, 6, 7, 8, 9, 15, 16, 19]):
+        word = word[:1]
     else:
-        word = words_fixed[i][:2]
+        word = word[:2]
     ans[word] = i
 print(ans)
 
