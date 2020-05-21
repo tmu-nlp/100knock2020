@@ -16,7 +16,7 @@ class User:
 
 def get_progress() -> List[User]:
     cur = Path(".")
-    users = list(filter(lambda x: x.is_dir() and x.name not in IGNORE, cur.iterdir()))
+    users = list(filter(lambda x: x.is_dir() and x.name not in IGNORE, sorted(cur.iterdir())))
 
     progress = list()
     # user ごとの progress を取得する
