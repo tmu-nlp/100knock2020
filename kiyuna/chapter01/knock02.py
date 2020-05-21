@@ -1,0 +1,40 @@
+r"""knock02.py
+02. 「パトカー」＋「タクシー」＝「パタトクカシーー」
+「パトカー」＋「タクシー」の文字を先頭から交互に連結して文字列「パタトクカシーー」を得よ．
+
+[URL]
+https://nlp100.github.io/ja/ch01.html#02-パトカータクシーパタトクカシーー
+
+[Ref]
+- zip_longest
+    - https://docs.python.org/ja/3/library/itertools.html#itertools.zip_longest
+
+[Usage]
+python knock02.py
+"""
+import os
+import sys
+from itertools import zip_longest
+from typing import Iterator, Tuple
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
+from kiyuna.utils.message import Renderer, message  # isort:skip
+
+
+def concat(iterator: Iterator[Tuple[str]]) -> str:
+    return "".join("".join(chars) for chars in iterator)
+
+
+if __name__ == "__main__":
+
+    with Renderer("knock02") as out:
+
+        s, t = "パトカー", "タクシー"
+        out.result([s, t], concat(zip(s, t)))
+
+        s, t = "パトカー", "リムジンバス"
+        out.result([s, t], concat(zip_longest(s, t, fillvalue="")))
+        out.result([s, t], concat(zip_longest(s, t, fillvalue="＠")))
+
+        ss = ["１２３", "ＡＢＣ", "ａｂｃ"]
+        out.result(ss, concat(zip(*ss)))
