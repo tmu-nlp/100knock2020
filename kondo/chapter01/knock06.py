@@ -20,6 +20,7 @@ set_Y = set(Y)
 union = set_X | set_Y
 intersec = set_X & set_Y
 diff = set_X - set_Y
+#diff = set_Y - set_X
 
 print("和集合: {}\n積集合: {}\n差集合: {}\n".format(union, intersec, diff))
 
