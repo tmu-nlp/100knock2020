@@ -47,7 +47,7 @@ def trunc(msg: str) -> str:
 
 
 def message(
-    *text: Optional[Tuple[Stringifiable]],
+    *text: Optional[Stringifiable],
     CR: bool = False,
     type: str = "emit",
     file: IO[str] = sys.stderr,
@@ -70,11 +70,12 @@ class Renderer(object):
         self.cnt = 1
 
     def __enter__(self) -> Type["Renderer"]:
+        message()
         message(underlined(self.title), type="success")
         return self
 
     def __exit__(self, *args) -> None:
-        message()
+        pass
 
     def header(self, head: str = "") -> None:
         message(bold(f"{self.cnt:2d}. {head}"), type="info")
