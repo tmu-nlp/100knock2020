@@ -25,7 +25,7 @@ if __name__ == "__main__":
     s = "Hi He Lied Because Boron Could Not Oxidize Fluorine.\
          New Nations Might Also Sign Peace Security Clause. Arthur King Can."
 
-    single_idxs = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+    single_idxs = {1, 5, 6, 7, 8, 9, 15, 16, 19}
 
     with Renderer("knock04") as out:
 

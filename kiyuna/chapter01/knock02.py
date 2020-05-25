@@ -8,6 +8,8 @@ https://nlp100.github.io/ja/ch01.html#02-パトカータクシーパタトクカ
 [Ref]
 - zip_longest
     - https://docs.python.org/ja/3/library/itertools.html#itertools.zip_longest
+- 引数リストのアンパック
+    - https://docs.python.org/ja/3.6/tutorial/controlflow.html#unpacking-argument-lists
 
 [Usage]
 python knock02.py
