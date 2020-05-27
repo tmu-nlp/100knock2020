@@ -5,7 +5,7 @@ from typing import Type
 import dill
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
-from kiyuna.utils.message import message, trunc  # isort:skip
+from kiyuna.utils.message import message, trunc  # noqa: E402 isort:skip
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 
