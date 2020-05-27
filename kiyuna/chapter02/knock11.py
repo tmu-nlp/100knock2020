@@ -29,15 +29,15 @@ diff -sw <(python knock11.py $INPUT_PATH) <(expand -t 1 $INPUT_PATH)
 """
 import os
 import sys
-from typing import Iterator, TypeVar
+from typing import Generator, TypeVar
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 Path = TypeVar("Path", bound=str)
 
 
-def tab2space(path: Path) -> Iterator[str]:
+def tab2space(path: Path) -> Generator[str]:
     with open(path) as f:
         for line in f:
             yield line.replace("\t", " ")

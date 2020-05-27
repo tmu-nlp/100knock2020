@@ -9,6 +9,16 @@ https://nlp100.github.io/ja/ch01.html#02-パトカータクシーパタトクカ
 - zip_longest
     - https://docs.python.org/ja/3/library/itertools.html#itertools.zip_longest
 
+```
+l = ['one', 'two', 'three']
+print('{}-{}-{}'.format(*l))
+# one-two-three
+
+d = {'name': 'Alice', 'age': 20}
+print('{name} is {age} years old.'.format(**d))
+# Alice is 20 years old.
+```
+
 [Usage]
 python knock02.py
 """
@@ -18,7 +28,7 @@ from itertools import zip_longest
 from typing import Iterator, Tuple
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
 def concat(iterator: Iterator[Tuple[str]]) -> str:

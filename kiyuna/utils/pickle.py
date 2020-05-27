@@ -5,7 +5,7 @@ from typing import Type
 import dill
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
-from kiyuna.utils.message import message, trunc  # isort:skip
+from kiyuna.utils.message import message, trunc  # noqa: E402 isort:skip
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 
@@ -15,8 +15,10 @@ def get_path(file_name: str) -> str:
 
 
 class SaveHelper(object):
+    name: str
+
     def __init__(self, name: str) -> None:
-        self.name: str = name
+        self.name = name
 
     def __enter__(self) -> Type["SaveHelper"]:
         message("saving:", self.name, CR=True, type="status")

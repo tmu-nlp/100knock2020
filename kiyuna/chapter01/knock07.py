@@ -16,12 +16,13 @@ python knock07.py
 import os
 import string
 import sys
+from typing import Generator
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
-def knock07(x: int, y: str, z: float) -> str:
+def knock07(x: int, y: str, z: float) -> Generator[str]:
 
     yield "f-strings", f"{x}時の{y}は{z}"
 

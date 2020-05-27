@@ -1,6 +1,5 @@
-import os
 import sys
-from typing import IO, Any, Callable, Optional, Tuple, Type, TypeVar, Union
+from typing import IO, Callable, Optional, Tuple, Type, TypeVar, Union
 
 import colorama
 from colorama import Back, Fore, Style
@@ -67,12 +66,11 @@ class Renderer(object):
         self.cnt = 1
 
     def __enter__(self) -> Type["Renderer"]:
-        message()
         message(underlined(self.title), type="success")
         return self
 
     def __exit__(self, *args) -> None:
-        pass
+        message()
 
     def header(self, head: str = "") -> None:
         message(bold(f"{self.cnt:2d}. {head}"), type="info")

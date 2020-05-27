@@ -25,7 +25,7 @@ import sys
 from collections import Counter, defaultdict
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
 if __name__ == "__main__":
@@ -42,4 +42,4 @@ if __name__ == "__main__":
     for k, v in sorted(
         cnter.items(), key=lambda x: (x[1], x[0]), reverse=True
     ):
-        print(f"{v:4d} {k}")
+        print(f"{v:04d} {k}")

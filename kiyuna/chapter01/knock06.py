@@ -20,7 +20,7 @@ import sys
 from knock05 import n_gram
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
 if __name__ == "__main__":
@@ -44,7 +44,6 @@ if __name__ == "__main__":
     print(f"X includes 'se': {tgt in X}")
     print(f"Y includes 'se': {tgt in Y}")
 
-    message()
     with Renderer("MEMO") as out:
         out.result(r"X ∪ Y", X.union(Y))
         out.result(f"X ∩ Y", X.intersection(Y))

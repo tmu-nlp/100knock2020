@@ -19,11 +19,10 @@ python knock09.py
 """
 import os
 import random
-import string
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
 if __name__ == "__main__":
