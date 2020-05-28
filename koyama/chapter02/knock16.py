@@ -34,3 +34,6 @@ if __name__ == "__main__":
     N = int(sys.argv[1])
     input_file_path = "popular-names.txt"
     my_split(input_file_path, N)
+
+# コマンドで実行
+# split -n 10 popular-names.txt split_file
