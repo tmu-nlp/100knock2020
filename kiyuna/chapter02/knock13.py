@@ -25,7 +25,7 @@ cat
 INPUT_PATH=./popular-names.txt
 python knock13.py
 # diff の取り方 3 種類
-paste -d $'\t' col1.txt col2.txt | diff -s out13a -
+paste -d $'\t' col[1-2].txt | diff -s out13a -
 cat out13a | (paste col1.txt col2.txt | diff -s /dev/fd/3 -) 3<&0
 if ls out13b; then
     diff -s out13b $INPUT_PATH
@@ -33,13 +33,13 @@ fi
 """
 import os
 import sys
-from typing import Generator
+from typing import Iterator
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
-def merge_cols(*fnames: str, sep=" ") -> Generator[str]:
+def merge_cols(*fnames: str, sep=" ") -> Iterator[str]:
     for cols in zip(*map(open, fnames)):
         yield sep.join(map(lambda col: col.rstrip(), cols))
 

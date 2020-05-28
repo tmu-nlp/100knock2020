@@ -11,10 +11,12 @@ r"""knock16.py
 https://nlp100.github.io/ja/ch02.html#16-ファイルをn分割する
 
 [Ref]
+- collections.deque
+    - https://docs.python.org/ja/3/library/collections.html#deque-recipes
 - split に -n オプションはあるのか
     - https://linuxjm.osdn.jp/html/GNU_textutils/man1/split.1.html
     - https://www.atmarkit.co.jp/ait/articles/1711/24/news016.html
-    - バイト単位で n 分割してしまうっぽい（少なめにとって最後のファイルにしわ寄せか）
+    - `-n l/N` と指定すれば行単位でN分割できる（文数の分布は謎）
 
 [Command]
 split
@@ -32,7 +34,7 @@ source knock16_test.sh; test 59
 N=59 のとき
     方法 1 のとき -> 48*57 + 44*1 = 2780: 58 ファイル（空のファイルが）
     方法 2 のとき -> 48*7 + 47*52 = 2780: 59 ファイル
-24 行を 7 つに分割しようとすると，方法 1 のとき 6 ファイルになる
+24 行のファイルを 7 つに分割しようとすると，方法 1 のとき 6 ファイルになる
 """
 import os
 import sys
