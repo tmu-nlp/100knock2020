@@ -38,12 +38,11 @@ from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 input_path = "popular-names.txt"
 col1, col2 = "col1.txt", "col2.txt"
 
-with open(col1, "w") as f1, open(col2, "w") as f2:
-    with open(input_path) as f_in:
-        for line in f_in:
-            cols = line.split("\t")
-            f1.write(cols[0] + "\n")
-            print(cols[1], file=f2)
+with open(col1, "w") as f1, open(col2, "w") as f2, open(input_path) as f_in:
+    for line in f_in:
+        cols = line.split("\t")
+        f1.write(cols[0] + "\n")
+        print(cols[1], file=f2)
 
 for i in range(4):
     with open(f"col{i + 1}.txt", "w") as f:
