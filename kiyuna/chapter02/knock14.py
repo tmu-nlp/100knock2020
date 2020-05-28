@@ -21,13 +21,13 @@ diff -s <(head -n $N $INPUT_PATH) <(python knock14.py $INPUT_PATH $N)
 """
 import os
 import sys
-from typing import Iterator
+from typing import Generator
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
-def head(path: str, n: int) -> Iterator[str]:
+def head(path: str, n: int) -> Generator[str]:
     with open(path) as f:
         for _ in range(n):
             yield f.readline()

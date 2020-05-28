@@ -15,7 +15,7 @@ from typing import Any, List, Sequence
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 import kiyuna.common as my  # isort:skip
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
 def n_gram(seq: Sequence[Any], n: int) -> List[Sequence[Any]]:

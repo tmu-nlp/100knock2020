@@ -33,13 +33,13 @@ fi
 """
 import os
 import sys
-from typing import Iterator
+from typing import Generator
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
-def merge_cols(*fnames: str, sep=" ") -> Iterator[str]:
+def merge_cols(*fnames: str, sep=" ") -> Generator[str]:
     for cols in zip(*map(open, fnames)):
         yield sep.join(map(lambda col: col.rstrip(), cols))
 

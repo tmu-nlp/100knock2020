@@ -52,6 +52,7 @@ def plot_progress(users: np.array, scores: np.array):
         )
 
     # グラフの設定
+    plt.xticks(rotation = 45)
     # 縦軸のラベルを 10 問刻みにする
     whole = sum(QUESTIONS)
     plt.ylim(0, whole)

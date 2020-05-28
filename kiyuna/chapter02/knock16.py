@@ -14,6 +14,7 @@ https://nlp100.github.io/ja/ch02.html#16-ファイルをn分割する
 - split に -n オプションはあるのか
     - https://linuxjm.osdn.jp/html/GNU_textutils/man1/split.1.html
     - https://www.atmarkit.co.jp/ait/articles/1711/24/news016.html
+    - バイト単位で n 分割してしまうっぽい（少なめにとって最後のファイルにしわ寄せか）
 
 [Command]
 split
@@ -29,15 +30,15 @@ split -l $((($num_line + $N - 1) / $N)) $INPUT_PATH out16_
 [Explanation]
 source knock16_test.sh; test 59
 N=59 のとき
-    方法 1 のとき -> 48*57 + 44*1: 58 ファイル（空のファイルが）
-    方法 2 のとき -> 48*7 + 47*52: 59 ファイル
+    方法 1 のとき -> 48*57 + 44*1 = 2780: 58 ファイル（空のファイルが）
+    方法 2 のとき -> 48*7 + 47*52 = 2780: 59 ファイル
 24 行を 7 つに分割しようとすると，方法 1 のとき 6 ファイルになる
 """
 import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
 if __name__ == "__main__":
@@ -68,5 +69,5 @@ if __name__ == "__main__":
                     f_out.write(f_in.readline())
                 res2.append(m)
 
-    message(res1)
-    message(res2)
+    # message(res1)
+    # message(res2)

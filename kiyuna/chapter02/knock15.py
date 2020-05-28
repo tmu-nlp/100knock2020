@@ -26,7 +26,7 @@ from collections import deque
 from typing import Deque
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-from kiyuna.utils.message import Renderer, message  # isort:skip
+from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 
 
 def tail(path: str, n: int) -> Deque[str]:
