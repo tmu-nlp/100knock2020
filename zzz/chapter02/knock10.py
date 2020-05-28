@@ -1,5 +1,7 @@
 import sys
 
+# wc -l popular-names.txt
+
 with open(sys.argv[1], 'r') as file:
     line_counter = 0
 

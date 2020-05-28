@@ -1,5 +1,8 @@
 import sys
 
+# cut -f1,2 popular-names.txt
+
+
 with open(sys.argv[1], 'r') as file:
     col1 = []
     col2 = []

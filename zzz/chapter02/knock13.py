@@ -1,4 +1,7 @@
 import sys
+
+# paste col1.txt col2.txt
+
 with open(sys.argv[1], 'r') as col1_file:
     with open(sys.argv[2], 'r') as col2_file:
         col1_2 = []
