@@ -16,7 +16,9 @@ class User:
 
 def get_progress() -> List[User]:
     cur = Path(".")
-    users = list(filter(lambda x: x.is_dir() and x.name not in IGNORE, sorted(cur.iterdir())))
+    users = list(
+        filter(lambda x: x.is_dir() and x.name not in IGNORE, sorted(cur.iterdir()))
+    )
 
     progress = list()
     # user ごとの progress を取得する
@@ -52,7 +54,7 @@ def plot_progress(users: np.array, scores: np.array):
         )
 
     # グラフの設定
-    plt.xticks(rotation = 45)
+    plt.xticks(rotation=30, fontsize=10)
     # 縦軸のラベルを 10 問刻みにする
     whole = sum(QUESTIONS)
     plt.ylim(0, whole)

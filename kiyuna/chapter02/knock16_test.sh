@@ -10,6 +10,6 @@ test() {
     ls -1 out16_* | wc -l               # N と等しいか
 }
 
-for i in $(seq 1 99); do
-    test $i
-done
+# for i in $(seq 1 99); do
+#     test $i
+# done
