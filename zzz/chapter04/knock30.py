@@ -12,6 +12,11 @@ def write_to_mecab():
 
 
 def load_mecab(filename):
+    '''
+
+    :param filename:
+    :return: morpheme_text: sentence_list[words_list[dict]]
+    '''
     types = ['surface', 'pos', 'pos1', '_', '_', '_', '_', 'base', '_', '_']
     morpheme_text = []
     morpheme_sent = []
