@@ -8,6 +8,7 @@ https://nlp100.github.io/ja/ch03.html#24-ファイル参照の抽出
 [Ref]
 - re.findall
     - https://docs.python.org/ja/3/library/re.html#re.findall
+        - 1 行に複数あっても大丈夫
 - re.IGNORECASE / re.I
     - https://docs.python.org/ja/3/library/re.html#re.I
         - 大文字・小文字を区別しないマッチングを行います;
@@ -37,23 +38,25 @@ python knock24.py
 import os
 import re
 import sys
-from typing import Iterator, List, Match, Tuple
+from typing import Iterator, Tuple, Union
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 from kiyuna.utils.pickle import load  # noqa: E402 isort:skip
 from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 from kiyuna.utils.message import trunc, green  # noqa: E402 isort:skip
 
+Group = Union[str, tuple]
 
-def exec_findall(wiki: List[str], pattern: str) -> Iterator[Tuple[str, Match]]:
+
+def exec_findall(wiki: str, pattern: str) -> Iterator[Tuple[str, Group]]:
     reg = re.compile(pattern)
-    for line in wiki:
-        for match in reg.findall(line):  # 1 行に複数あっても大丈夫
+    for line in wiki.split("\n"):
+        for match in reg.findall(line):
             yield line, match
 
 
 if __name__ == "__main__":
-    wiki = load("UK").split("\n")
+    wiki = load("UK")
 
     pat = (
         r"(?:\s=\s)?"  # 「基礎情報 国]」対策

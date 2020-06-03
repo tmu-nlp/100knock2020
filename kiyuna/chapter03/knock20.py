@@ -54,5 +54,5 @@ if __name__ == "__main__":
     dump(article["text"], out_fname)
 
     with Renderer("MEMO") as out:
-        message(article.keys())
+        out.result("article.keys()", article.keys())
         # pprint.pprint(article)

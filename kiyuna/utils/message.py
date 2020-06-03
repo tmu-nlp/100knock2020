@@ -46,7 +46,7 @@ def trunc(msg: str) -> str:
 
 
 def message(
-    *text: Optional[Stringifiable],
+    *text: Stringifiable,
     CR: bool = False,
     type: str = "emit",
     file: IO[str] = sys.stderr,
@@ -69,6 +69,7 @@ class Renderer(object):
         self.cnt = 1
 
     def __enter__(self) -> Type["Renderer"]:
+        message()
         message(underlined(self.title), type="success")
         return self
 

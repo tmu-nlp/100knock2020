@@ -29,23 +29,23 @@ python knock22.py
 import os
 import re
 import sys
-from typing import Iterator, List, Match, Tuple
+from typing import Iterator, Match, Tuple
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 from kiyuna.utils.pickle import load  # noqa: E402 isort:skip
 
 
-def exec_search(wiki: List[str], pattern: str) -> Iterator[Tuple[str, Match]]:
+def exec_search(wiki: str, pattern: str) -> Iterator[Tuple[str, Match]]:
     reg = re.compile(pattern)
-    for line in wiki:
+    for line in wiki.split("\n"):
         match = reg.search(line)
         if match:
             yield line, match
 
 
 if __name__ == "__main__":
-    wiki = load("UK").split("\n")
+    wiki = load("UK")
 
     pat_category_only = r"\[\[Category:(?P<Category_name>.+?)(\||])"
     for _, match in exec_search(wiki, pat_category_only):

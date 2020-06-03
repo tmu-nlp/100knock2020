@@ -35,10 +35,10 @@ url = "https://www.mediawiki.org/w/api.php"
 def make_payload(filename: str) -> dict:
     return {
         "action": "query",
-        "titles": "File:" + filename,
-        "prop": "imageinfo",
         "format": "json",
         "iiprop": "url",
+        "prop": "imageinfo",
+        "titles": "File:" + filename,
     }
 
 
@@ -61,7 +61,7 @@ def save_file_from_url(url: str, filename: str) -> None:
         f_out.write(f_in.read())
 
 
-def render_html(path_img, path_html="out29.html"):
+def render_html(path_img, path_html="out29.html") -> None:
     message("save :", path_html, type="status")
     contents = (
         "<!DOCTYPE html><html>"
