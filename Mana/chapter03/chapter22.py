@@ -6,8 +6,8 @@ britain = f.readline()
 for line in britain.split("\\n"):
   if re.match(r'\[\[Category:', line):
     if re.search(r':(.*?)\|', line):
-      print(re.search(r':(.*?)\|', line).group()[1:-1])
+      print(re.search(r':(.*?)\|', line).group(1))
     else:
-      print(re.search(r':(.*?)\]', line).group()[1:-1])
+      print(re.search(r':(.*?)\]', line).group(1))
 
 f.close()
