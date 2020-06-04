@@ -5,7 +5,7 @@ if __name__ == '__main__':
     filename = 'jawiki-country.json'
     text = extract_text(filename, 'イギリス')
 
-    pattern = r'=+.*?=+?\n'
+    pattern = r'=+.*?=+?\n'         # ===スポーツ===, ====サッカー====, ...
     sections = re.findall(pattern, '\n'.join(text))
     for item in sections:
-        print(item.replace('\n', '').replace('=', ''), str(int(item.count('=') / 2) - 1))
+        print(item.replace('\n', '').replace('=', ''), str(int(item.count('=') / 2)))

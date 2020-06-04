@@ -17,13 +17,15 @@ def parsing(text, keyword, bracket='{}'):
                 num_bracket += line.count(bracket_f)
                 num_bracket -= line.count(bracket_b)
                 if '*' in line:
+                    # not a new item
                     res[-1] = res[-1] + ' ' + line
                 else:
                     res.append(line)
         if keyword in line:
-            num_bracket += line.count(bracket_f)
+            num_bracket += 2
             start = True
             if '*' in line:
+                # not a new item
                 res[-1] = res[-1] + ' ' + line
             else:
                 res.append(line)
@@ -31,10 +33,10 @@ def parsing(text, keyword, bracket='{}'):
     return res
 
 
-def template(text):
-    text = parsing(text, '基礎情報')
+def template(text, keyword):
+    text = parsing(text, keyword)
 
-    pattern = r'\|(.*?) *= *(.*)'
+    pattern = r'\|(.*?) *= *(.*)'           # |他元首等肩書1 = [[貴族院 (イギリス)|貴族院議長]]
     basic = re.findall(pattern, '\n'.join(text))
 
     res = {}
@@ -44,8 +46,18 @@ def template(text):
 
 
 if __name__ == '__main__':
+    '''
+    {{title
+    |key1 = value1
+    |key2 = value2
+    ...
+    }}
+    '''
+
     filename = 'jawiki-country.json'
+    keyword = '基礎情報'
     text = extract_text(filename, 'イギリス')
 
-    basic = template(text)
-    print(basic)
+    basic = template(text, keyword)
+    for (key, value) in basic.items():
+        print(key, value)

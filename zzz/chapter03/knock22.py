@@ -5,6 +5,6 @@ if __name__ == '__main__':
     filename = 'jawiki-country.json'
     text = extract_text(filename, 'イギリス')
 
-    pattern = r'\[\[Category:(.*?)(?:\|.*\]\]|\]\])'
+    pattern = r'\[\[Category:(.*?)(?:\|.*\]\]|\]\])'    # [[Category:(イギリス)(|*]] / ]])
     categories = re.findall(pattern, '\n'.join(text))
     print('\n'.join(categories))
