@@ -23,7 +23,7 @@ for i in range(len(basicInfo2)):
         info[1] = re.sub(r'\<(.*?)\/\>', "", info[1])
         dict_basic[info[0][1:]] = info[1]
 
-flagimage = dict_basic["国旗画像 "].replace(" ", "_")
+flagimage = dict_basic["国旗画像 "]
 
 """
     get_imageinfo.py
@@ -49,7 +49,11 @@ PARAMS = {
 R = S.get(url=URL, params=PARAMS)
 DATA = R.json()
 
+#print(DATA)
+
 PAGES = DATA["query"]["pages"]
+#print(PAGES.items())
+
 
 for k, v in PAGES.items():
     print(v["title"] + "'s url is " + v["imageinfo"][0]["url"])
