@@ -6,6 +6,6 @@ if __name__ == '__main__':
     text = extract_text(filename, 'イギリス')
 
     # pattern = r'ファイル:(.*?\..*?)\|'
-    pattern = r'ファイル:(.*?\..*?)(?:\||\])'
+    pattern = r'ファイル:(.*?\..*?)(?:\||\])'       # ファイル:Wembley Stadium, illuminated.jpg|thumb|220px|[[ウェンブリー・スタジアム]]
     files = re.findall(pattern, '\n'.join(text))
     print(len(files), files)

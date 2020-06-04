@@ -12,23 +12,24 @@ if __name__ == '__main__':
 
     pattern = r'(\'{3})(.*?)(\'{3})'
     basic = del_mark(basic, pattern, lambda x: x.group(2))
-    print(basic)
+    # print(basic)
 
+    pattern = r'(\[\[)(.*?)(:?#.*?|)(\|)(.*?)(\]\])'
+    basic = del_mark(basic, pattern, lambda x: x.group(5))
     pattern = r'(\[\[)(.*?)(\]\])'
     basic = del_mark(basic, pattern, lambda x: x.group(2))
-    print(basic)
 
     #remove ltalics
     pattern = r'(\'{2})(.*?)(\'{2})'
     basic = del_mark(basic, pattern, lambda x: x.group(2))
-    print(basic)
-
-    #remove ltalics
-    pattern = r'(\'{2})(.*?)(\'{2})'
-    basic = del_mark(basic, pattern, lambda x: x.group(2))
-    print(basic)
 
     #remove outter link
     pattern = r'(\[)(.*?)(\])'
     basic = del_mark(basic, pattern, lambda x: x.group(2))
-    print(basic)
+
+    #remove lang-mark
+    # pattern = r'(\{\{lang\|.*?\|)(.*?)(\}\})'
+    # basic = del_mark(basic, pattern, lambda x: x.group(2))
+
+    for (key, value) in basic.items():
+        print(key, value)

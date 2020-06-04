@@ -12,11 +12,15 @@ if __name__ == '__main__':
 
     pattern = r'(\'{3})(.*?)(\'{3})'
     basic = del_mark(basic, pattern, lambda x: x.group(2))
-    print(basic)
+    # print(basic)
 
     # pattern = r'(\[\[.*?)(#\|.*?)(\]\])'
     # basic = del_mark(basic, pattern, 2)
     # print(basic)
-    pattern = r'(\[\[)(.*?)(\]\])'
+    pattern = r'(\[\[)(.*?)(:?#.*?|)(\|)(.*?)(\]\])'                          # [[記事名|表示文字]], [[記事名#節名|表示文字]]
+    basic = del_mark(basic, pattern, lambda x: x.group(5))
+    pattern = r'(\[\[)(.*?)(\]\])'                                              # [[記事名]]
     basic = del_mark(basic, pattern, lambda x: x.group(2))
-    print(basic)
+
+    for (key, value) in basic.items():
+        print(key, value)
