@@ -7,14 +7,14 @@ r"""knock28.py
 https://nlp100.github.io/ja/ch03.html#28-mediawikiマークアップの除去
 
 [Ref]
-- regex
-    - https://docs.python.org/ja/3/library/re.html?#regular-expression-syntax
-        - 特殊文字（special characters）
-            - \number
-                - 同じ番号のグループの中身にマッチします。
-                - グループは 1 から始まる番号をつけられます。
+- Wikipedia記事のイギリス
+    - https://ja.wikipedia.org/wiki/イギリス
 - ウィキペディアのマークアップ早見表
     - https://ja.wikipedia.org/wiki/Help:%E6%97%A9%E8%A6%8B%E8%A1%A8
+        - 強調
+        - 内部リンク等 [[〜]]
+        - 外部リンク
+        - 箇条書き
 - ウィキペディアの「基礎情報 国」
     - https://ja.wikipedia.org/wiki/Template:基礎情報_国
 - ウィキペディアの <ref>
@@ -25,6 +25,13 @@ https://nlp100.github.io/ja/ch03.html#28-mediawikiマークアップの除去
 - ウィキペディアの Cite web
     - https://ja.wikipedia.org/wiki/Template:Cite_web
         - {{Cite web |url= |title= |accessdate=}}
+- ウィキペディアの仮リンク
+    - https://ja.wikipedia.org/wiki/Template:仮リンク
+        - {{仮リンク|日本語版項目名|言語プレフィックス|他言語版項目名|...}}
+- ウィキペディアの0
+    - https://ja.wikipedia.org/wiki/Template:0
+        - {{0}}
+            - 不可視な数字の0が挿入されます。表中で数字の桁を揃える用途に使用できます。
 
 [Usage]
 python knock28.py
@@ -85,31 +92,37 @@ if __name__ == "__main__":
         # [double curly brackets] reshape lang templates
         r"{{lang\|(?P<Lang_tag>.+?)\|(?P<Text>.+?)}}": r"\g<Lang_tag>:\g<Text>",
         r"{{Cite web\|.*?title=(?P<Title>.+?)(?:\|.*?)}}": r"\g<Title>",
+        r"{{仮リンク\|(.+?)\|.+}}": r"\1",
+        r"{\{0}}": r"",
         r"{{en icon}}": r" (英語)",
         r"<br />{{.+}}": r"",
         # [double square brackets] replace interwiki link and extended image syntax for displayed characters
         r"\[\[.*?([^\|]+?)\]\]": r"\1",
         # [single square bracket] replace external link for displayed characters
-        r"\[.*?([^ \|]+?)\]": r"\1",
+        r"\[[^>]*(.*)\]": r"\1",
         # remove footnotes
-        r'<ref name=".+?" />': r"",
         r'<ref(?: name=".+?")?>(.*)</ref>': r" (\1)",
+        r'<ref name=".+?" />': r"",
+        r"<references/>": r"",
         # remove <br />
         r"<br />": r"\n",
     }
 
     infobox = load("infobox")
-
     res = remove_asterisks_in_ref(infobox)
     for pair in pairs.items():
         res = exec_sub(res, *pair)
 
+    debug, inv = False, False
     with Renderer("knock28") as out:
         for key in res:
             src = infobox.get(key, "該当なし")
             dst = res[key]
-            if src == dst:
-                out.cnt += 1
+            if debug:
+                if (src == dst) ^ inv:
+                    out.cnt += 1
+                else:
+                    out.result(key, (src, green(dst)))
             else:
                 out.result(key, (src, green(dst)))
         if infobox == res:
