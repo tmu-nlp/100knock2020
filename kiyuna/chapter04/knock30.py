@@ -32,6 +32,8 @@ def mecab_into_sentences(path: str = "./neko.txt.mecab") -> Iterator[Sentence]:
     sentence: Sentence = []
     with open(path) as f:
         for line in map(lambda x: x.rstrip(), f):
+            if not line:
+                continue
             if line == "EOS":
                 yield sentence
                 sentence = []
