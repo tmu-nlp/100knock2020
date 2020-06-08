@@ -17,6 +17,7 @@ $(OBJ).mecab: $(OBJ)
 clean:
 	-rm $(OBJ) $(OBJ).mecab  # make で作成
 	-rm out36.png                # knock36.py で作成
+	-rm out37.png                # knock37.py で作成
 	-rm out38.png                # knock38.py で作成
 	-rm out39.png                # knock39.py で作成
 
