@@ -10,6 +10,9 @@ https://nlp100.github.io/ja/ch03.html#29-国旗画像のurlを取得する
 - MediaWiki API
     - https://www.mediawiki.org/wiki/API:Imageinfo/ja
 
+[MEMO]
+- curl でもできる
+
 [Usage]
 python knock29.py
 """
