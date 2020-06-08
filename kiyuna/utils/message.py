@@ -1,5 +1,5 @@
 import sys
-from typing import IO, Callable, Optional, Tuple, Type, TypeVar, Union
+from typing import IO, Callable, Tuple, Type, TypeVar, Union
 
 import colorama
 from colorama import Back, Fore, Style
