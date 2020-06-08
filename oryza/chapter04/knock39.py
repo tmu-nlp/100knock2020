@@ -1,7 +1,6 @@
 from knock30 import conll_read
 from knock35 import word_freqs
 import matplotlib.pyplot as plt
-import operator
 
 texts = conll_read()
 counts = word_freqs(texts)
