@@ -12,7 +12,7 @@ dict_basic = {}
 for i in range(len(basicInfo2)):
   info = basicInfo2[i].split("=")
   if len(info) == 2:
-    dict_basic[info[0][1:]] = info[1]
+    dict_basic[info[0][1:-1]] = info[1][1:]
 
 
 for elem in dict_basic:

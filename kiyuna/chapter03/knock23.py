@@ -37,7 +37,7 @@ python knock23.py
 import os
 import re
 import sys
-from typing import Iterator, List, Match, Tuple
+from typing import Iterator, Match, Tuple
 
 from knock22 import exec_search
 
@@ -46,27 +46,32 @@ from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 from kiyuna.utils.pickle import load  # noqa: E402 isort:skip
 
 
-def exec_match(wiki: List[str], pattern: str) -> Iterator[Tuple[str, Match]]:
+def exec_match(wiki: str, pattern: str) -> Iterator[Tuple[str, Match]]:
     reg = re.compile(pattern)
-    for line in wiki:
+    for line in wiki.split("\n"):
         match = reg.match(line)
         if match:
             yield line, match
 
 
 if __name__ == "__main__":
-    wiki = load("UK").split("\n")
+    wiki = load("UK")
 
     pat = r"(?P<Level>=+)\s*(?P<Heading>.+)\s*(?P=Level)"
     for _, match in exec_match(wiki, pat):
         level, heading = match.group(1, 2)
-        print((heading, len(level) - 1))
+        print(
+            "  " * (len(level) - 2),
+            "+",
+            f" lv{len(level) - 1} ",
+            heading,
+            sep="",
+        )
 
-    with Renderer("match") as out:
-        for line, match in exec_match(wiki, pat):
-            out.result(line, match.groups())
-
-    pat_beginning = r"^" + pat
-    with Renderer("search") as out:
-        for line, match in exec_search(wiki, pat_beginning):
-            out.result(line, match.groups())
+    with Renderer("re.match() vs. re.search()") as out:
+        pat_hat = r"^" + pat
+        it = zip(exec_match(wiki, pat), exec_search(wiki, pat_hat))
+        for (line, match1), (_, match2) in it:
+            assert match1.groups() == match2.groups(), line
+        else:
+            message("same")

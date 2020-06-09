@@ -22,26 +22,26 @@ python knock21.py
 import os
 import re
 import sys
-from typing import Iterator, List
+from typing import Iterator
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 from kiyuna.utils.message import Renderer, message  # noqa: E402 isort:skip
 from kiyuna.utils.pickle import load  # noqa: E402 isort:skip
 
 
-def exec_fullmatch(wiki: List[str], pattern: str) -> Iterator[str]:
+def exec_fullmatch(wiki: str, pattern: str) -> Iterator[str]:
     reg = re.compile(pattern)
-    for line in wiki:
+    for line in wiki.split("\n"):
         if reg.fullmatch(line):
             yield line
 
 
 if __name__ == "__main__":
-    wiki = load("UK").split("\n")
+    wiki = load("UK")
 
     for category in exec_fullmatch(wiki, r"\[\[Category:.+\]\]"):
         print(category)
 
     with Renderer("MEMO") as out:
-        lines = tuple(line for line in wiki if "Category" in line)
+        lines = tuple(line for line in wiki.split("\n") if "Category" in line)
         out.result("Category を含む行", lines)
