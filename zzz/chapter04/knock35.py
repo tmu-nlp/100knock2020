@@ -19,7 +19,7 @@ def count_word(morpheme_text, co_occurrence_with=None):
             for index in range(len(sentence) - 1):
                 if sentence[index]['base'] == co_occurrence_with:
                     cache.append(sentence[index + 1]['base'])
-                if sentence[index+ 1]['base'] == co_occurrence_with:
+                if sentence[index + 1]['base'] == co_occurrence_with:
                     cache.append(sentence[index]['base'])
 
     counter = Counter(cache)
