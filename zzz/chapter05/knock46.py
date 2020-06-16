@@ -16,13 +16,16 @@ if __name__ == '__main__':
                     continue
 
                 auxiliaries = []
+                noun_aux = []
                 for src in chunk.srcs:
                     src_chunk = sentence[src]
                     pre_word = ''
                     for morph in src_chunk.morphs:
                         if morph.pos == '助詞':
-                            auxiliaries.append(pre_word + morph.surface)
+                            auxiliaries.append(morph.surface)
+                            noun_aux.append(pre_word + morph.surface)
                         pre_word = morph.surface
+                noun_aux.sort(key=dict(zip(noun_aux, auxiliaries)).get)
                 auxiliaries.sort()
 
-                print(verb, ' '.join(auxiliaries))
+                print(verb, ' '.join(auxiliaries), ' '.join(noun_aux))
