@@ -44,14 +44,14 @@ class Chunk():
                 return elem.base
     
     def replace_for_X(self, A):
-        words = []
+        words = set()
         for elem in self.morphs:
             if elem.pos != "記号":
-                if elem.pos != "名詞":
-                    words.append(elem.surface)
+                if elem.pos == "名詞":
+                    words.add(A)
                 else:
-                    words.append(A)
-        return "".join(words)
+                    words.add(elem.surface)
+        return "".join(sorted(words))
     
 def morph2chunk(morphlists):
     morphlists.append(Morph("*"))
@@ -74,7 +74,7 @@ def sources(chunklist):
             chunklist[chunklist[i].dst].srcs.append(i)
 
 if __name__ == "__main__":
-    with open("ai.ja.txt.parsed", "r") as ai:
+    with open("ai.ja1.txt.parsed", "r") as ai:
         ai = ai.readlines()
 
     ai_morphs = []

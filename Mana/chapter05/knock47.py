@@ -4,7 +4,7 @@ from knock41 import Chunk, morph2chunk, sources
 
 
 if __name__ == "__main__":
-    with open("ai.ja.txt.parsed", "r") as ai:
+    with open("ai.ja1.txt.parsed", "r") as ai:
         ai = ai.readlines()
 
     ai_morphs = []
