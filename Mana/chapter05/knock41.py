@@ -1,19 +1,58 @@
-import pprint
 from knock40 import Morph
-from knock40 import morph2sent
+from knock40 import morph2sents
 
 class Chunk():
     def __init__(self, morphlist):
         self.morphs = morphlist[1:]
         #self.morphs = [elem.show() for elem in morphlist[1:]]見やすい
         self.meta = morphlist[0].show()
-        self.dst = self.meta[2]
-        self.srcs = self.meta[1]
+        if self.meta[2] != "-1D":
+            self.dst = int(self.meta[2][:-1])
+        else:
+            self.dst = None
+        self.srcs = []
 
     def show_bunsetsu_tag(self):
         return "".join([elem.show() for elem in self.morphs])
 
+    def show_morph_pos1(self):
+        return [elem.pos1 for elem in self.morphs]
 
+    def show_only_words(self):
+        words = []
+        for elem in self.morphs:
+            if elem.pos != "記号":
+                words.append(elem.surface)
+        return "".join(words)
+    
+    def show_only_listwords(self):
+        words = []
+        for elem in self.morphs:
+            if elem.pos != "記号":
+                words.append(elem.surface)
+        return words
+
+    def show_only_listpos(self):
+        words = []
+        for elem in self.morphs:
+            words.append(elem.pos)
+        return words    
+
+    def show_base_for_X(self, X):
+        for elem in self.morphs:
+            if elem.pos == X:
+                return elem.base
+    
+    def replace_for_X(self, A):
+        words = []
+        for elem in self.morphs:
+            if elem.pos != "記号":
+                if elem.pos != "名詞":
+                    words.append(elem.surface)
+                else:
+                    words.append(A)
+        return "".join(words)
+    
 def morph2chunk(morphlists):
     morphlists.append(Morph("*"))
     chunks = []
@@ -29,6 +68,11 @@ def morph2chunk(morphlists):
             chunk.append(elem)
     return chunks
 
+def sources(chunklist):
+    for i in range(len(chunklist)):
+        if chunklist[i].dst != None:
+            chunklist[chunklist[i].dst].srcs.append(i)
+
 if __name__ == "__main__":
     with open("ai.ja.txt.parsed", "r") as ai:
         ai = ai.readlines()
@@ -38,46 +82,52 @@ if __name__ == "__main__":
         ai_morphs.append(Morph(ai[i]))
     
     #print(morph2sent(ai_morphs)[1][0].show())
+    dep = morph2chunk(morph2sents(ai_morphs)[1])
+    #print(dep)
+    sources(dep)
 
-    dep = morph2chunk(morph2sent(ai_morphs)[1])
-    pprint.pprint([elem.show_bunsetsu_tag() for elem in dep])
+    for i in range(len(dep)):
+        print(dep[i].show_bunsetsu_tag(), end="\t")
+        if dep[i].dst != None:
+            print(dep[dep[i].dst].show_bunsetsu_tag())
+        else:
+            print("Root")
 
 """
-出力こんな感じになりますけど。
-[('17D', '0', ['人工', '知能']),
- ('17D', '1', ['（', 'じん', 'こうち', 'のう', '、', '、']),
- ('3D', '2', ['AI']),
- ('17D', '3', ['〈', 'エーアイ', '〉', '）', 'と', 'は', '、']),
- ('5D', '4', ['「', '『', '計算']),
- ('9D', '5', ['（', '）', '』', 'という']),
- ('9D', '6', ['概念', 'と']),
- ('8D', '7', ['『', 'コンピュータ']),
- ('9D', '8', ['（', '）', '』', 'という']),
- ('10D', '9', ['道具', 'を']),
- ('12D', '10', ['用い', 'て']),
- ('12D', '11', ['『', '知能', '』', 'を']),
- ('13D', '12', ['研究', 'する']),
- ('14D', '13', ['計算', '機', '科学']),
- ('15D', '14', ['（', '）', 'の']),
- ('16D', '15', ['一', '分野', '」', 'を']),
- ('17D', '16', ['指す']),
- ('34D', '17', ['語', '。']),
- ('20D', '18', ['「', '言語', 'の']),
- ('20D', '19', ['理解', 'や']),
- ('21D', '20', ['推論', '、']),
- ('22D', '21', ['問題', '解決', 'など', 'の']),
- ('24D', '22', ['知的', '行動', 'を']),
- ('24D', '23', ['人間', 'に']),
- ('26D', '24', ['代わっ', 'て']),
- ('26D', '25', ['コンピューター', 'に']),
- ('27D', '26', ['行わ', 'せる']),
- ('34D', '27', ['技術', '」', '、', 'または', '、']),
- ('29D', '28', ['「', '計算', '機']),
- ('31D', '29', ['（', 'コンピュータ', '）', 'による']),
- ('31D', '30', ['知的', 'な']),
- ('33D', '31', ['情報処理', 'システム', 'の']),
- ('33D', '32', ['設計', 'や']),
- ('34D', '33', ['実現', 'に関する']),
- ('35D', '34', ['研究', '分野', '」', 'と', 'も']),
- ('-1D', '35', ['さ', 'れる', '。'])]
+人工知能        語。
+（じんこうちのう、、    語。
+AI      〈エーアイ〉）とは、
+〈エーアイ〉）とは、    語。
+「『計算        （）』という
+（）』という    道具を
+概念と  道具を
+『コンピュータ  （）』という
+（）』という    道具を
+道具を  用いて
+用いて  研究する
+『知能』を      研究する
+研究する        計算機科学
+計算機科学      （）の
+（）の  一分野」を
+一分野」を      指す
+指す    語。
+語。    研究分野」とも
+「言語の        推論、
+理解や  推論、
+推論、  問題解決などの
+問題解決などの  知的行動を
+知的行動を      代わって
+人間に  代わって
+代わって        行わせる
+コンピューターに        行わせる
+行わせる        技術」、または、
+技術」、または、        研究分野」とも
+「計算機        （コンピュータ）による
+（コンピュータ）による  情報処理システムの
+知的な  情報処理システムの
+情報処理システムの      実現に関する
+設計や  実現に関する
+実現に関する    研究分野」とも
+研究分野」とも  される。
+される。        される。
 """

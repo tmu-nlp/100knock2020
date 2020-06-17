@@ -13,32 +13,31 @@ class Morph():
             self.pos = attr[0]
             self.pos1 = attr[1]
             self.EOS = False
+            self.meta = False
         else:
             self.EOS = True
+            self.meta = False
 
     def show(self):
         if self.EOS:
             return "EOS"
+        elif not self.meta:
+            return self.surface
         else:
-            try:
-                return self.surface
-            except AttributeError:
-                return self.meta
+            return self.meta
 
-def morph2sent(listcabocha):
+def morph2sents(listcabocha):
     sents = []
     sent = []
-    BOS = True
     for elem in listcabocha:
         if not elem.EOS:
             sent.append(elem)
-        elif BOS and elem.EOS:
-            sents.append(sent)
-            BOS = False
         else:
+            if sent != []:
+                sents.append(sent)
             sent = []
-            BOS = True
     return sents
+
 
 if __name__ == "__main__":
     with open("ai.ja.txt.parsed", "r") as ai:
@@ -47,11 +46,9 @@ if __name__ == "__main__":
     ai_morphs = []
     for i in range(len(ai)):
         ai_morphs.append(Morph(ai[i]))
-    
-    print(morph2sent(ai_morphs)[0])
+        
+    sents = morph2sents(ai_morphs)
 
-
-    sents = morph2sent(ai_morphs)[2]
     for sent in sents:
-        print(sent.show())
-    #print(sents[1].show()[0])
+        for morph in sent:
+            print(morph.show())
