@@ -9,9 +9,9 @@ if __name__ == '__main__':
                 node = chunk
                 while node is not None:
                     if node.dst != -1:
-                        print(''.join([m.surface for m in node.morphs]), '->', end=' ')
+                        print(''.join([m.surface for m in node.morphs if m.pos != '記号']), '->', end=' ')
                         node = sentence[node.dst]
                     else:
-                        print(''.join([m.surface for m in node.morphs]))
+                        print(''.join([m.surface for m in node.morphs if m.pos != '記号']))
                         node = None
             print('EOS')

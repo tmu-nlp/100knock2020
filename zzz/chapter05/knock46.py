@@ -24,7 +24,8 @@ if __name__ == '__main__':
                         if morph.pos == '助詞':
                             auxiliaries.append(morph.surface)
                             noun_aux.append(pre_word + morph.surface)
-                        pre_word = morph.surface
+                        if morph.pos != '記号':
+                            pre_word = morph.surface
                 noun_aux.sort(key=dict(zip(noun_aux, auxiliaries)).get)
                 auxiliaries.sort()
 
