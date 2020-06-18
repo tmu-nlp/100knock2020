@@ -42,7 +42,7 @@ from knock41 import Chunk, cabocha_into_chunks
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 from kiyuna.utils.message import message  # noqa: E402 isort:skip
 
-# d = dict()
+d = dict()
 
 
 class ChunkNormalized(Chunk):
@@ -78,7 +78,7 @@ class ChunkNormalized(Chunk):
         tmp.append(repl)  # self.morphs[l, r) はまとめて repl に置換
         tmp += [m.surface for m in self.morphs[r:] if m.pos != "記号"]
         clause = "".join(tmp)
-        # d[tuple(m.pos for m in self.morphs)] = self.norm
+        d[tuple(m.pos for m in self.morphs if m.pos != "記号")] = self.morphs
         return clause
 
 
@@ -107,15 +107,15 @@ def replace_and_combine(part1, part2, tail, chunks):
 
 if __name__ == "__main__":
     res = []
-    # for chunks in cabocha_into_chunks():
-    for chunks in islice(cabocha_into_chunks(), 33, 34):
+    # for chunks in islice(cabocha_into_chunks(), 33, 34):
+    for chunks in cabocha_into_chunks():
         chunks = {k: ChunkNormalized(v) for k, v in chunks.items()}
         paths = []
         # 名詞列のパス（idx の列）を作る
         for idx, chunk in chunks.items():
             if not chunk.has_pos("名詞"):
                 continue
-            if chunk.dst not in chunks:
+            if idx not in chunks:
                 continue
             tmp = [idx]
             dst = chunk.dst
@@ -149,12 +149,36 @@ if __name__ == "__main__":
                         part1, tail = p1[:i], p1[i]
                         part2 = p2[: p2.index(w1)]
                         break
+                else:
+                    """
+                    p1, p2 = [55, 56], [57, 64] のようなケースがある
+                        55: Chunk(srcs=[], dst=56, morphs=米国政府に),
+                        56: Chunk(srcs=[55], dst=88, morphs=よれば、),
+                        57: Chunk(srcs=[], dst=64, morphs=2013年から),
+                        58: Chunk(srcs=[], dst=59, morphs=ディープラーニングに関する),
+                        59: Chunk(srcs=[58], dst=64, morphs=論文数では),
+                        60: Chunk(srcs=[], dst=64, morphs=中国が),
+                        61: Chunk(srcs=[], dst=62, morphs=米国を),
+                        62: Chunk(srcs=[61], dst=64, morphs=超えて),
+                        63: Chunk(srcs=[], dst=64, morphs=世界一と),
+                        64: Chunk(srcs=[57, 59, 60, 62, 63], dst=71, morphs=なっている。)
+                    """
+                    continue
                 ans = replace_and_combine(part1, part2, tail, chunks)
             res.append(ans + "\n")
-    sys.stdout.writelines(res)
+    # sys.stdout.writelines(res)
     message(f"write {len(res)} lines", type="success")
 
     # 1 つの chunk に複数の名詞を含む chunk を列挙
-    # for k, v in d.items():
-    #     if k.count("名詞") > 1:
-    #         print(k, v, file=sys.stderr)
+    for k, v in sorted(d.items()):
+        if k.count("名詞") > 1:
+            # print(k, v, file=sys.stderr)
+            tmp = "".join(k)
+            while "名詞名詞" in tmp:
+                tmp = tmp.replace("名詞名詞", "名詞")
+            if tmp.count("名詞") == 1:
+                continue
+            print(k)
+            for morph in filter(lambda x: x.pos != "記号", v):
+                print(f"{morph.surface:23}\t{morph.pos}")
+            print()
