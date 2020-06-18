@@ -115,7 +115,7 @@ if __name__ == "__main__":
         for idx, chunk in chunks.items():
             if not chunk.has_pos("名詞"):
                 continue
-            if chunk.dst not in chunks:  # 名詞を含まないのパス
+            if chunk.dst not in chunks:
                 continue
             tmp = [idx]
             dst = chunk.dst
