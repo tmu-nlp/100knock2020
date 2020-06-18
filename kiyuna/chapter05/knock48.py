@@ -33,7 +33,7 @@ if __name__ == "__main__":
         chunks = {k: ChunkNormalized(v) for k, v in chunks.items()}
         for c in chunks.values():
             if c.dst not in chunks:
-                # 長さ 1 のパス
+                # 名詞を含まないのパス
                 continue
             # [48-1] 各文節は（表層形の）形態素列で表現する
             tmp = [c.norm]
