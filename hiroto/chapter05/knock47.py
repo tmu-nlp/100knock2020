@@ -3,10 +3,31 @@ from knock46 import *
 fname = "ai.ja.txt.parsed"
 
 class VP_data:
-    def __init__(self, VP, srcs):
-        self.VP = VP
+    def __init__(self, VP_str, srcs):
+        self.VP = VP_str
         self.srcs = srcs
 
+
+def is_verb_in_chunk(chunk):
+    for morph in chunk.morphs:
+        if morph.pos == '動詞':
+            return True
+    return False
+
+def get_VP(chunk, NP, idx):
+    for morph in chunk.morphs:
+        if morph.pos == '動詞':
+            #基本形とってくる
+            verb = morph.base
+            #"サ変接続＋を＋動詞の基本形"をつくる
+            VP = NP + verb
+            #係り元をとってくる
+            #remove()を使うので，copy()を使う
+            srcs = chunk.srcs.copy()
+            #一旦，"サ変接続＋を"の文節を係り元から削除
+            srcs.remove(idx)
+            VP = VP_data(VP, srcs)
+            return VP
 
 def extract_dependency(sentence):
     # class Verbのリスト
@@ -14,38 +35,24 @@ def extract_dependency(sentence):
     dst = -1
     for chunk in sentence:
         i = 0
-        #"サ変接続＋を"の文節の係り先が今見ている文節だった場合
-        if chunk.idx == dst:
-            for morph in chunk.morphs:
-                #一番左の動詞をとる
-                if morph.pos == '動詞':
-                    #基本形とってくる
-                    verb = morph.base
-                    #"サ変接続＋を＋動詞の基本形"をつくる
-                    VP = NP + verb
-                    #係り元をとってくる
-                    srcs = chunk.srcs
-                    #"サ変接続＋を"の文節を係り元から削除
-                    srcs.remove(idx)
-                    VP = VP_data(VP, srcs)
+        for morph in chunk.morphs:
+            #インデックスが要素のインデックスをこえたら
+            if i+1 == len(chunk.morphs):
+                break
+            next_morph = chunk.morphs[i + 1]
+            #"サ変接続＋を"かどうか
+            if morph.pos == '名詞' and morph.pos1 == 'サ変接続'\
+            and next_morph.base == 'を':
+                dst = chunk.dst
+                idx = chunk.idx
+                NP = morph.surface + 'を'
+                if is_verb_in_chunk(sentence[dst]):
+                    VP = get_VP(sentence[dst], NP, idx)
                     VPs.append(VP)
                     break
-        else:
-            for morph in chunk.morphs:
-                #インデックスが要素のインデックスをこえたら
-                if len(chunk.morphs) == i + 1:
-                    break
-                next_morph = chunk.morphs[i + 1]
-                #"サ変接続＋を"かどうか
-                if morph.pos == '名詞' and morph.pos1 == 'サ変接続'\
-                and next_morph.base == 'を':
-                    dst = chunk.dst
-                    idx = chunk.idx
-                    NP = morph.surface + 'を'
-                    break
                 else: pass
-                i += 1
-
+            else: pass
+            i += 1
     #(VP, [格パターン], [格フレーム])のタプルのリスト
     vpfs = []
     for VP in VPs:
@@ -122,7 +129,7 @@ def main():
         cnt += 1
         print("#############sentence{}####################".format(cnt))
         print_mining(sentence)
-        if cnt == 40: break
+        if cnt == 13: break
 
     #out_to_file(sentences)
 
