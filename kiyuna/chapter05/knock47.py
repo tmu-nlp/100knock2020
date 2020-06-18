@@ -68,7 +68,7 @@ if __name__ == "__main__":
                     ms = tuple(chunks[sc_idx].get_pos("助詞"))
                     if ms:
                         # 文節内に助詞が複数ある場合は最も右のものを選ぶ
-                        srcs.append((ms[-1].base, chunks[sc_idx].norm))
+                        srcs.append((ms[0].base, chunks[sc_idx].norm))
             if failed:  # 「サ変接続名詞+を+動詞」がなかった
                 continue
             if srcs:
@@ -85,3 +85,10 @@ if __name__ == "__main__":
                 res.append(f"{v_base}\t{p_base}\t{clause}\n")
     sys.stdout.writelines(res)
     message(f"write {len(res)} lines", type="success")
+
+    # 1 つの chunk に複数の動詞を含む chunk を列挙
+    # for i, chunks in enumerate(cabocha_into_chunks()):
+    #     chunks = {k: ChunkNormalized(v) for k, v in chunks.items()}
+    #     for chunk in chunks.values():
+    #         if len(list(chunk.get_pos("動詞"))) > 1:
+    #             print(i, chunk)

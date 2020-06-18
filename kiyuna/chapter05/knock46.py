@@ -42,7 +42,7 @@ class ChunkNormalized(Chunk):  # knock45 と同様
 if __name__ == "__main__":
     res = []
     # for chunks in cabocha_into_chunks():
-    for chunks in islice(cabocha_into_chunks(), 33, 34):
+    for chunks in islice(cabocha_into_chunks(), 33, 34):  # list[33:34] と同様
         chunks = {k: ChunkNormalized(v) for k, v in chunks.items()}
         for cv in filter(lambda c: c.has_pos("動詞"), chunks.values()):
             # [45-1] 動詞を含む文節において，最左の動詞の基本形を述語とする
