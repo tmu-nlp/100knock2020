@@ -1,13 +1,17 @@
 import re
 from zzz.chapter05.knock40 import Morph
 
+
 class Chunk:
     def __init__(self,
                  morphs: list = [],
                  dst: int = 0,
                  srcs: list = []):
+        # content
         self.morphs = morphs
+        # parent node
         self.dst = dst
+        # child nodes
         self.srcs = srcs
 
     def append_morph(self, morph: Morph):
