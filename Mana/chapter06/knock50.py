@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn import __version__ as sklearn_version
 from sklearn.model_selection import train_test_split
 
+
 df_news = pd.read_csv('newsCorpora.csv', sep='\t', header=None)
 df_news.columns = ['ID', 'Title', 'URL', 'Publisher', 'Category', 'Story', 'Hostname', 'Timestamp']
 
