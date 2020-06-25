@@ -85,10 +85,15 @@ def make_sentence_list(text):
 def make_NP_pairs(sentence):
     NP_indices = []
     for chunk in sentence:
+        flag = False
         for morph in chunk.morphs:
             if morph.pos == '名詞':
-                NP_indices.append(chunk.idx)
+                flag = True
+            if morph.pos == '動詞':
+                flag = False
                 break
+        if flag == True:
+            NP_indices.append(chunk.idx)
     NP_pairs = list(comb(NP_indices, 2))
     return NP_pairs
 
@@ -195,7 +200,7 @@ def main():
         cnt += 1
         print(f"#############sentence{cnt}####################")
         print_path(sentence)
-        if cnt == 34: break
+        if cnt == 32: break
 
 
 if __name__ == "__main__":
