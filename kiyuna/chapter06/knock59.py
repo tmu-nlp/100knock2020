@@ -96,7 +96,6 @@ if __name__ == "__main__":
 
     models = defaultdict(list)
     for i, (clf, need_dense, *args) in enumerate(clfs):
-        message(i)
         message(type(clf).__name__, type="status")
         message(clf.get_params())
         if args:

@@ -24,7 +24,7 @@ from kiyuna.utils.pickle import dump, load  # noqa: E402 isort:skip
 datasets = ["train", "valid", "test"]
 
 
-def calc_accuracy(C, data):
+def calc_accuracy(C):
     classifier = LogisticRegression(
         C=C, multi_class="multinomial", solver="lbfgs", random_state=123
     ).fit(*load_dataset(f"./train.feature.txt"))
