@@ -26,5 +26,10 @@ lr = LogisticRegression(C=100.0, random_state=0)
 #適合
 lr.fit(X_train_vec, y_train.values)
 
-for c, coef in zip(lr.classes_, lr.coef_):
-    print(c, coef)
+weights = lr.coef_[0].tolist()
+names = tfidf.get_feature_names()
+weights_names = list(zip(weights, names))
+weights_names.sort()
+
+print('10 Most Important: \n' + str(weights_names[:10]))
+print('\n10 Least Important: \n' + str(weights_names[:-11:-1]))
