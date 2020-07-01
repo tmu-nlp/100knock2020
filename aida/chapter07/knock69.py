@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     vec_embedded = TSNE(n_components=2, random_state=0).fit_transform(vecs)
     fig, ax = plt.subplots(figsize=(16, 12))
-    colors = ['red', 'blue', 'green', 'yellow', 'purple']
+    colors = ['green', 'red', 'cyan', 'magenta', 'yellow']
     for i, vec in enumerate(vec_embedded):
         plt.scatter(vec[0], vec[1], color=colors[kmeans.labels_[i]])
     for i, country in enumerate(target_countries):
