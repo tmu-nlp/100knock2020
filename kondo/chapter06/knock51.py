@@ -1,7 +1,7 @@
 """
 51. 特徴量抽出Permalink
 学習データ，検証データ，評価データから特徴量を抽出し，
-それぞれtrain.feature.txt，valid.feature.txt，test.feature.txtというファイル名で保存せよ． 
+それぞれtrain.feature.txt，valid.feature.txt，test.feature.txtというファイル名で保存せよ．
 なお，カテゴリ分類に有用そうな特徴量は各自で自由に設計せよ．
 記事の見出しを単語列に変換したものが最低限のベースラインとなるであろう．
 """
