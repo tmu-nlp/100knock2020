@@ -16,9 +16,9 @@ if __name__ == "__main__":
                         metric="euclidean")
 
     pd.set_option("display.max_rows", 116)
-    print(dataframe[0])
-
-    a = dendrogram(result)
+    #print(dataframe[0])
+    #print(dataframe[0].values)
+    a = dendrogram(result, labels=dataframe[0].values)
     plt.show()
 
 """
