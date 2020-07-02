@@ -16,15 +16,15 @@ with open("countries_v1.txt", "r") as f2:
 for line in countries:
   line = line.strip()
   try:
-    country_name.append(line)
     countries_vec.append(model[line])
+    country_name.append(line)
   except KeyError:
     try:
       line = line.replace(" ", "_")
-      country_name.append(line)
       countries_vec.append(model[line])
+      country_name.append(line)
     except KeyError:
-      #print(line)
+      print(line)
 
 X = np.array(countries_vec)
 linkage_result = linkage(X, method='ward', metric='euclidean')

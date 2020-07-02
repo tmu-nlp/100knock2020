@@ -31,5 +31,9 @@ for line in countries:
 X = np.array(countries_vec)
 tsne = TSNE(random_state=0, n_iter=15000, metric='cosine')
 embs = tsne.fit_transform(X)
-plt.scatter(embs[:, 0], embs[:, 1])
-plt.savefig("tsne.jpg")
+plt.figure(figsize=(16, 12))
+for i in range(len(embs)):
+  plt.scatter(embs[i][0], embs[i][1])
+  plt.annotate(country_name[i], (embs[i][0], embs[i][1]))
+plt.savefig('tsne1.png')
+plt.show()
