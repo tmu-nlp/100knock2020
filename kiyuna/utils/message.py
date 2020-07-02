@@ -21,18 +21,10 @@ prefix = {
 }
 red: Callable[[object], str] = lambda obj: Fore.RED + str(obj) + Fore.RESET
 green: Callable[[object], str] = lambda obj: Fore.GREEN + str(obj) + Fore.RESET
-yellow: Callable[[object], str] = (
-    lambda obj: Fore.YELLOW + str(obj) + Fore.RESET
-)
-lightgreen: Callable[[object], str] = (
-    lambda obj: Fore.LIGHTGREEN_EX + str(obj) + Fore.RESET
-)
-back_blue: Callable[[object], str] = (
-    lambda obj: Back.BLUE + str(obj) + Back.RESET
-)
-bold: Callable[[object], str] = (
-    lambda obj: Style.BRIGHT + str(obj) + Style.RESET_ALL
-)
+yellow: Callable[[object], str] = (lambda obj: Fore.YELLOW + str(obj) + Fore.RESET)
+lightgreen: Callable[[object], str] = (lambda obj: Fore.LIGHTGREEN_EX + str(obj) + Fore.RESET)
+back_blue: Callable[[object], str] = (lambda obj: Back.BLUE + str(obj) + Back.RESET)
+bold: Callable[[object], str] = (lambda obj: Style.BRIGHT + str(obj) + Style.RESET_ALL)
 underlined: Callable[[object], str] = (
     lambda obj: colorama.ansi.code_to_chars(4) + str(obj) + Style.RESET_ALL
 )
@@ -46,10 +38,7 @@ def trunc(msg: str) -> str:
 
 
 def message(
-    *text: Stringifiable,
-    CR: bool = False,
-    type: str = "emit",
-    file: IO[str] = sys.stderr,
+    *text: Stringifiable, CR: bool = False, type: str = "emit", file: IO[str] = sys.stderr,
 ) -> None:
     if isinstance(text, tuple):
         text = " ".join(map(str, text))
@@ -64,9 +53,9 @@ class Renderer(object):
     title: str
     cnt: int
 
-    def __init__(self, title: str) -> None:
+    def __init__(self, title: str, start=1) -> None:
         self.title = title
-        self.cnt = 1
+        self.cnt = start
 
     def __enter__(self) -> Type["Renderer"]:
         message()
