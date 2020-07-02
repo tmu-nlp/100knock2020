@@ -1,5 +1,8 @@
 # 学習済み単語ベクトルを扱うためにインポート
 import gensim
+# デンドログラムを作成するためにインポート
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import dendrogram, linkage
 
 def main():
     # 「word2vec」で単語をベクトル化する
@@ -9,9 +12,10 @@ def main():
     # 「United States」は内部的に「United_States」と表現されている
     model['United_States']
 
-    # 結果をファイルに保存
-    with open('knock60.txt', mode='w', encoding="utf-8") as f:
-        print(model['United_States'], file=f)
+    plt.figure(figsize=(32.0, 24.0))
+    link = linkage(vec, method='ward')
+    dendrogram(link, labels=target_countries,leaf_rotation=90,leaf_font_size=10)
+    plt.show()
 
 if __name__ == '__main__':
     main()

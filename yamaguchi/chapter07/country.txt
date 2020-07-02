@@ -1,0 +1,98 @@
+1アフガニスタン  Afghanistan
+2アルバニア  Albania
+3アルジェリア  Algeria
+4アンドラ  Andorra
+5アンゴラ  Angola
+6アンティグア・バーブーダ  Antigua and Barbuda
+7アルゼンチン  Argentina
+8アルメニア  Armenia
+9オーストラリア  Australia
+10オーストリア  Austria
+11アゼルバイジャン Azerbaijan
+12バハマ  Bahamas
+13バーレーン  Bahrain
+14バングラデシュ  Bangladesh
+15バルバドス  Barbados
+16ベラルーシ  Belarus
+17ベルギー  Belgium
+18ベリーズ  Belize
+19ベニン  Benin
+20ブータン  Bhutan
+21ボリビア  Bolivia
+22ボスニア・ヘルツェゴビナ  Bosnia and Herzegovina
+23ボツワナ  Botswana
+24ブラジル  Brazil
+25ブルネイ  Brunei Darussalam
+26ブルガリア  Bulgaria
+27ブルキナファソ  Burkina Faso
+28ブルンジ  Burundi
+29カーボベルデ  Cabo Verde
+30カンボジア  Cambodia
+31カメルーン  Cameroon
+32カナダ  Canada
+33中央アフリカ共和国  Central African Republic
+34チャド  Chad
+35チリ  Chile
+36中国  China
+37コロンビア  Colombia
+38コモロ  Comoros
+39コンゴ  Congo (Republic of the)
+40コスタリカ  Costa Rica
+41コートジボアール  Cote d'Ivoire
+42クロアチア  Croatia
+43キューバ  Cuba
+44キプロス  Cyprus
+45チェコ  Czech Republic
+46朝鮮民主主義人民共和国  Democratic People's Republic of Korea
+47コンゴ民主共和国  Democratic Republic of the Congo
+48デンマーク  Denmark
+49ジブチ  Djibouti
+50ドミニカ  Dominica
+51ドミニカ共和国  Dominican Republic
+52エクアドル  Ecuador
+53エジプト  Egypt
+54エルサルバドル  El Salvador
+55赤道ギニア  Equatorial Guinea
+56エリトリア  Eritrea
+57エストニア  Estonia
+58エスワティニ  Eswatini
+59エチオピア  Ethiopia
+60フィジ－  Fiji
+61フィンランド  Finland
+62フランス  France
+63ガボン  Gabon
+64ガンビア  Gambia
+65ジョージア  Georgia
+66ドイツ  Germany
+67ガーナ  Ghana
+68ギリシャ  Greece
+69グレナダ  Grenada
+70グアテマラ  Guatemala
+71ギニア  Guinea
+72ギニアビサウ  Guinea-Bissau
+73ガイアナ  Guyana
+74ハイチ  Haiti
+75ホンジュラス  Honduras
+76ハンガリ－   Hungary
+77アイスランド  Iceland
+78インド  India
+79インドネシア  Indonesia
+80イラン  Iran
+81イラク  Iraq
+82アイルランド  Ireland
+83イスラエル  Israel
+84イタリア  Italy
+85ジャマイカ  Jamaica
+86日本  Japan
+87ヨルダン  Jordan
+88カザフスタン  Kazakhstan
+89ケニア  Kenya
+90キリバス  Kiribati
+91クウェート  Kuwait
+92キルギスタン  Kyrgyzstan
+93ラオス人民民主共和国  Lao People's Democratic Republic
+94ラトビア  Latvia
+95レバノン  Lebanon
+96レソト  Lesotho
+97リベリア  Liberia
+98リビア  Libya

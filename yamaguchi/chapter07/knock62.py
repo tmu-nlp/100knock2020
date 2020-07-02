@@ -10,8 +10,9 @@ def main():
     model['United_States']
 
     # 結果をファイルに保存
-    with open('knock60.txt', mode='w', encoding="utf-8") as f:
-        print(model['United_States'], file=f)
+    # 「most_similar」を用いて「United States」と類似度が高い10語とその類似度を出力
+    with open('knock62.txt', mode='w', encoding="utf-8") as f:
+        print(model.most_similar('United_States', topn=10), file=f)
 
 if __name__ == '__main__':
     main()

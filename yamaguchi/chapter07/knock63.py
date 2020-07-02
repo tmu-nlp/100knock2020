@@ -10,8 +10,11 @@ def main():
     model['United_States']
 
     # 結果をファイルに保存
-    with open('knock60.txt', mode='w', encoding="utf-8") as f:
-        print(model['United_States'], file=f)
+    # 「most_similar」を用いて類似度が高い10語とその類似度を出力
+    # 「positive」と「negative」を指定して，
+    # 「Spain」に「Athens」を足し，そこから「Madrid」を引く．
+    with open('knock63.txt', mode='w', encoding="utf-8") as f:
+        print(model.most_similar(positive=['Spain', 'Athens'], negative=['Madrid'], topn=10), file=f)
 
 if __name__ == '__main__':
     main()

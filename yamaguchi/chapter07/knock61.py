@@ -10,8 +10,9 @@ def main():
     model['United_States']
 
     # 結果をファイルに保存
-    with open('knock60.txt', mode='w', encoding="utf-8") as f:
-        print(model['United_States'], file=f)
+    # 「similarity」を用いて「United States」と「US」のコサイン類似度を計算
+    with open('knock61.txt', mode='w', encoding="utf-8") as f:
+        print(model.similarity('United_States', 'U.S.'), file=f)
 
 if __name__ == '__main__':
     main()
