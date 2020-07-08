@@ -11,7 +11,7 @@ from matplotlib import pyplot as plt
 from tqdm import tqdm
 import numpy as np
 import pickle
-import pickle
+
 #GPUを指定
 device = torch.device("cuda")
 
@@ -50,12 +50,13 @@ def fit(model, epoch_size=100, batch_size=80):
     dataloader = DataLoader(dataset, batch_size=batch_size)
     train_loss_list, valid_loss_list, train_acc_list, valid_acc_list = [], [], [], []
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=0.1)
+    optimizer = optim.SGD(model.parameters(), lr=0.0001)
     elapsed_list = []
     for epoch in tqdm(range(epoch_size)):
         #計測開始
         start = time.time()
         for inputs, targets in dataloader:
+            model.train()
             #勾配リセット
             optimizer.zero_grad()
             outputs = model(inputs)
@@ -86,17 +87,19 @@ def fit(model, epoch_size=100, batch_size=80):
 
 def calc_loss_acc(model, criterion):
     #train
-    outputs = model(train_vectors)
-    train_pred = select_class(outputs)
-    train_true = train_labels.numpy().copy()
-    train_loss = criterion(outputs, train_labels)
-    train_acc = accuracy_score(train_true, train_pred)
-    #valid
-    outputs = model(valid_vectors)
-    valid_pred = select_class(outputs)
-    valid_true = valid_labels.numpy().copy()
-    valid_loss = criterion(outputs, valid_labels)
-    valid_acc = accuracy_score(valid_true, valid_pred)
+    model.eval()
+    with torch.no_grad():
+        outputs = model(train_vectors.to(device))
+        train_pred = select_class(outputs)
+        train_true = train_labels.cpu().detach().numpy()
+        train_loss = criterion(outputs, train_labels.to(device)).cpu().detach().numpy()
+        train_acc = accuracy_score(train_true, train_pred)
+        #valid
+        outputs = model(valid_vectors.to(device))
+        valid_pred = select_class(outputs)
+        valid_true = valid_labels.cpu().detach().numpy()
+        valid_loss = criterion(outputs, valid_labels.to(device)).cpu().detach().numpy()
+        valid_acc = accuracy_score(valid_true, valid_pred)
 
     return train_loss, valid_loss, train_acc, valid_acc
 
@@ -104,7 +107,7 @@ def calc_loss_acc(model, criterion):
 def select_class(probs_list):
     labels = []
     for probs in probs_list:
-        label = np.argmax(probs.detach().numpy().copy())
+        label = np.argmax(probs.cpu().detach().numpy())
         labels.append(label)
     return labels
 
@@ -131,7 +134,7 @@ def draw(loss_lists, acc_lists, batch_size):
     ax2.set_title('Accuracy')
     ax2.legend()
     
-    plt.savefig(f"./77_checkpoints/picture/loss_acc_BatchSize{batch_size}.png")
+    plt.savefig(f"./picture/loss_acc_BatchSize{batch_size}.png")
 
 
 def main():
@@ -148,7 +151,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 '''
 #############batch_size1#######################
 train_loss_first:1.3774560689926147
