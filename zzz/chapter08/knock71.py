@@ -171,5 +171,7 @@ if __name__ == '__main__':
 
     model = OneLayerNN(300, 4)
 
-    pred_y = model.predict(x_train)
-    print('accuracy: {}'.format(model.score_accuracy(y_train, pred_y)))
+    # pred_y = model.predict(x_train)
+    # print('accuracy: {}'.format(model.score_accuracy(y_train, pred_y)))
+
+    print(F.softmax(model(x_train)))
