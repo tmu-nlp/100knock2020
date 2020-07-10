@@ -71,7 +71,7 @@ def run(train, valid, net, criterion, optimizer, device, batch_size=None, epochs
 
         logging.info(f"  Time: {t.msecs:f} [msec]")
         logging.info(f"  Train -- Loss: {loss_train:f} Acc: {acc_train:f}")
-        logging.info(f"  Valid -- Loss: {loss_train:f} Acc: {acc_train:f}")
+        logging.info(f"  Valid -- Loss: {loss_valid:f} Acc: {acc_valid:f}")
 
 
 if __name__ == "__main__":
@@ -90,37 +90,37 @@ if __name__ == "__main__":
 """result
 INFO:root:[batch_size: 1]
 INFO:root:At epoch 1  
-INFO:root:  Time: 10677.112579 [msec]
+INFO:root:  Time: 10378.630638 [msec]
 INFO:root:  Train -- Loss: 0.520309 Acc: 0.813647
-INFO:root:  Valid -- Loss: 0.520309 Acc: 0.813647
+INFO:root:  Valid -- Loss: 0.390366 Acc: 0.862172
 INFO:root:[batch_size: 2]
 INFO:root:At epoch 1  
-INFO:root:  Time: 5946.092844 [msec]
+INFO:root:  Time: 5314.306974 [msec]
 INFO:root:  Train -- Loss: 0.609950 Acc: 0.782853
-INFO:root:  Valid -- Loss: 0.609950 Acc: 0.782853
+INFO:root:  Valid -- Loss: 0.427684 Acc: 0.843446
 INFO:root:[batch_size: 4]
 INFO:root:At epoch 1  
-INFO:root:  Time: 2970.396757 [msec]
+INFO:root:  Time: 2472.664356 [msec]
 INFO:root:  Train -- Loss: 0.689351 Acc: 0.754025
-INFO:root:  Valid -- Loss: 0.689351 Acc: 0.754025
+INFO:root:  Valid -- Loss: 0.522721 Acc: 0.808989
 INFO:root:[batch_size: 8]
 INFO:root:At epoch 1  
-INFO:root:  Time: 1479.395628 [msec]
+INFO:root:  Time: 1302.513123 [msec]
 INFO:root:  Train -- Loss: 0.843706 Acc: 0.704979
-INFO:root:  Valid -- Loss: 0.843706 Acc: 0.704979
+INFO:root:  Valid -- Loss: 0.617113 Acc: 0.783521
 INFO:root:[batch_size: 16]
 INFO:root:At epoch 1  
-INFO:root:  Time: 772.440910 [msec]
+INFO:root:  Time: 653.101444 [msec]
 INFO:root:  Train -- Loss: 1.033986 Acc: 0.618027
-INFO:root:  Valid -- Loss: 1.033986 Acc: 0.618027
+INFO:root:  Valid -- Loss: 0.746136 Acc: 0.746067
 INFO:root:[batch_size: 32]
 INFO:root:At epoch 1  
-INFO:root:  Time: 428.272963 [msec]
+INFO:root:  Time: 383.610010 [msec]
 INFO:root:  Train -- Loss: 1.159062 Acc: 0.568701
-INFO:root:  Valid -- Loss: 1.159062 Acc: 0.568701
+INFO:root:  Valid -- Loss: 0.901269 Acc: 0.694382
 INFO:root:[batch_size: 10684]
 INFO:root:At epoch 1  
-INFO:root:  Time: 128.635883 [msec]
+INFO:root:  Time: 102.352619 [msec]
 INFO:root:  Train -- Loss: 1.725371 Acc: 0.292868
-INFO:root:  Valid -- Loss: 1.725371 Acc: 0.292868
+INFO:root:  Valid -- Loss: 1.627743 Acc: 0.314607
 """
