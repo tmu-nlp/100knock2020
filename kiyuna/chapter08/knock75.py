@@ -4,8 +4,6 @@
 訓練データでの損失，正解率，検証データでの損失，正解率をグラフにプロットし，
 学習の進捗状況を確認できるようにせよ．
 """
-import os
-
 import matplotlib.pyplot as plt
 import torch
 import tqdm

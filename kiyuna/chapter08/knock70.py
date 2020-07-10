@@ -18,11 +18,13 @@ random.seed(seed)
 np.random.seed(seed)
 torch.manual_seed(seed)
 
+os.makedirs("./data", exist_ok=True)
+
 
 class MyDataset(torch.utils.data.Dataset):
     def __init__(self, X, y):
         self.X = X.float()
-        self.y = y.reshape(-1).long()
+        self.y = y.long()
 
     def __len__(self):
         return len(self.X)
@@ -32,6 +34,7 @@ class MyDataset(torch.utils.data.Dataset):
 
 
 def build_and_save(split_name, emb):
+    os.makedirs("./data", exist_ok=True)
     path = f"../chapter06/{split_name}.txt"
     X, y = [], []
     for line in open(path):

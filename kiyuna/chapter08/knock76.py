@@ -30,8 +30,10 @@ def run(epochs=10):
     dataloader_train = DataLoader(train, batch_size=len(train), shuffle=True)
 
     log = {
-        "loss_train": [], "loss_valid": [],
-        "acc_train": [], "acc_valid": [],
+        "loss_train": [],
+        "loss_valid": [],
+        "acc_train": [],
+        "acc_valid": [],
     }
     for epoch in range(1, epochs + 1):
         print(f"At epoch {epoch:<3}")
@@ -65,8 +67,8 @@ def run(epochs=10):
             log["loss_valid"].append(loss_valid)
             log["acc_valid"].append(acc_valid)
 
-        print(f'  Train -- Loss: {loss_train:f} Acc: {acc_train:f}')
-        print(f'  Valid -- Loss: {loss_train:f} Acc: {acc_train:f}')
+        print(f"  Train -- Loss: {loss_train:f} Acc: {acc_train:f}")
+        print(f"  Valid -- Loss: {loss_valid:f} Acc: {acc_valid:f}")
         state_dict = {
             "epoch": epoch,
             "net_state": net.state_dict(),
@@ -74,39 +76,40 @@ def run(epochs=10):
         }
         torch.save(state_dict, f"./checkpoints/single_{epoch}.pt")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run()
 
 
 """result
 At epoch 1  
   Train -- Loss: 2.006530 Acc: 0.218645
-  Valid -- Loss: 2.006530 Acc: 0.218645
+  Valid -- Loss: 1.931139 Acc: 0.228464
 At epoch 2  
   Train -- Loss: 1.978520 Acc: 0.223418
-  Valid -- Loss: 1.978520 Acc: 0.223418
+  Valid -- Loss: 1.904820 Acc: 0.235206
 At epoch 3  
   Train -- Loss: 1.952119 Acc: 0.229221
-  Valid -- Loss: 1.952119 Acc: 0.229221
+  Valid -- Loss: 1.880004 Acc: 0.242697
 At epoch 4  
   Train -- Loss: 1.927229 Acc: 0.236148
-  Valid -- Loss: 1.927229 Acc: 0.236148
+  Valid -- Loss: 1.856585 Acc: 0.244195
 At epoch 5  
   Train -- Loss: 1.903738 Acc: 0.241389
-  Valid -- Loss: 1.903738 Acc: 0.241389
+  Valid -- Loss: 1.834472 Acc: 0.249438
 At epoch 6  
   Train -- Loss: 1.881561 Acc: 0.249906
-  Valid -- Loss: 1.881561 Acc: 0.249906
+  Valid -- Loss: 1.813576 Acc: 0.254682
 At epoch 7  
   Train -- Loss: 1.860611 Acc: 0.255990
-  Valid -- Loss: 1.860611 Acc: 0.255990
+  Valid -- Loss: 1.793809 Acc: 0.262172
 At epoch 8  
   Train -- Loss: 1.840799 Acc: 0.262261
-  Valid -- Loss: 1.840799 Acc: 0.262261
+  Valid -- Loss: 1.775100 Acc: 0.270412
 At epoch 9  
   Train -- Loss: 1.822051 Acc: 0.267690
-  Valid -- Loss: 1.822051 Acc: 0.267690
+  Valid -- Loss: 1.757370 Acc: 0.280150
 At epoch 10 
   Train -- Loss: 1.804294 Acc: 0.273587
-  Valid -- Loss: 1.804294 Acc: 0.273587
+  Valid -- Loss: 1.740554 Acc: 0.284644
 """
