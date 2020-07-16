@@ -25,8 +25,8 @@ class MultiLayerPerceptron(torch.nn.Module):
     def forward(self, x):
         x = F.relu(self.fc(x))
         for _ in range(self.mid_layers):
-        x = F.relu(self.bn(self.fc_mid(x)))
-        x = F.relu(self.fc_out(x))
+            x = F.relu(self.bn(self.fc_mid(x)))
+            x = F.relu(self.fc_out(x))
 
         return x
 

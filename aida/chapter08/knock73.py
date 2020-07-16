@@ -34,7 +34,7 @@ def train_sgd(model):
 
             train_loss += loss.item()
 
-        train_loss = train_loss / i
+        train_loss = train_loss / (i + 1)
         train_losses.append(train_loss)
 
         model.eval() 
