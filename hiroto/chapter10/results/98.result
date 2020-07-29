@@ -1,0 +1,4 @@
+train loss : 4.047
+dev loss : 5.922
+test BLEU :
+BLEU4 = 7.80, 44.4/16.8/7.5/3.6 (BP=0.654, ratio=0.702, syslen=24441, reflen=34833)
