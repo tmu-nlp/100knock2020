@@ -1,0 +1,15 @@
+##### dropout 0.1 #####
+train loss : 4.369
+dev loss : 4.794
+test BLEU :
+BLEU4 = 22.74, 54.2/29.8/18.7/12.3 (BP=0.922, ratio=0.925, syslen=29631, reflen=32025)
+##### dropout 0.2 #####
+train loss : 4.698
+dev loss : 4.885
+test BLEU :
+BLEU4 = 21.64, 54.0/29.4/18.3/12.0 (BP=0.892, ratio=0.897, syslen=28730, reflen=32025)
+##### dropout 0.3 #####
+train loss : 5.126
+dev loss : 5.171
+test BLEU :
+BLEU4 = 18.94, 50.4/25.7/15.2/9.5 (BP=0.911, ratio=0.914, syslen=29282, reflen=32025)
