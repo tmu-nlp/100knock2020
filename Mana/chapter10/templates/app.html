@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Translation app</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+
+{% from "_formhelpers.html" import render_field %}
+
+<div>翻訳したい文章を入力してください。</div>
+<form method=post action="/trans">
+
+  <dl>
+	  {{ render_field(form.entersent) }}
+  </dl>
+
+  <input type=submit value='英語に翻訳する' name='submit_btn'>
+
+</form>
+
+  </body>
+</html>
