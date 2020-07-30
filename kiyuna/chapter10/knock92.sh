@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eu
-<< __EOF__
+<<__EOF__
 92. 機械翻訳モデルの適用
 91で学習したニューラル機械翻訳モデルを用い，
 与えられた（任意の）日本語の文を英語に翻訳するプログラムを実装せよ．
@@ -24,4 +24,4 @@ SRC_PATH=data/kftt-data-1.0/data/tok/kyoto-test.ja
 
 CUDA_VISIBLE_DEVICES=$GPU fairseq-interactive \
     --path checkpoints/$EXP_NAME/checkpoint_best.pt \
-    data-bin/$EXP_NAME < $SRC_PATH | grep '^H' | cut -f3 > dumped/k92.$EXP_NAME.txt
+    data-bin/$EXP_NAME <$SRC_PATH | grep '^H' | cut -f3 >dumped/k92.$EXP_NAME.txt

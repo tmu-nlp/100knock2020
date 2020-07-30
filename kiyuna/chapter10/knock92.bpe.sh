@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eu
-<< __EOF__
+<<__EOF__
 92. 機械翻訳モデルの適用
 91で学習したニューラル機械翻訳モデルを用い，
 与えられた（任意の）日本語の文を英語に翻訳するプログラムを実装せよ．
@@ -24,5 +24,5 @@ BPE_CODE=data/kftt-data-1.0/data/bpe/code
 
 CUDA_VISIBLE_DEVICES=$GPU fairseq-interactive \
     --path checkpoints/$EXP_NAME/checkpoint_best.pt \
-     --remove-bpe --bpe=subword_nmt --bpe-codes $BPE_CODE \
-    data-bin/$EXP_NAME < $SRC_PATH | grep '^H' | cut -f3 > dumped/k92.$EXP_NAME.txt
+    --remove-bpe --bpe=subword_nmt --bpe-codes $BPE_CODE \
+    data-bin/$EXP_NAME <$SRC_PATH | grep '^H' | cut -f3 >dumped/k92.$EXP_NAME.txt

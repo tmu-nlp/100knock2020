@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eu
-<< __EOF__
+<<__EOF__
 90. データの準備
 機械翻訳のデータセットをダウンロードせよ．
 訓練データ，開発データ，評価データを整形し，必要に応じてトークン化などの前処理を行うこと．
@@ -26,10 +26,10 @@ __EOF__
 
 mkdir -p data
 pushd data
-    if ! [ -d kftt-data-1.0 ]; then
-        wget http://www.phontron.com/kftt/download/kftt-data-1.0.tar.gz
-        tar -zxvf kftt-data-1.0.tar.gz
-    fi
+if ! [ -d kftt-data-1.0 ]; then
+    wget http://www.phontron.com/kftt/download/kftt-data-1.0.tar.gz
+    tar -zxvf kftt-data-1.0.tar.gz
+fi
 popd
 
 EXP_NAME=KFTT.ja-en

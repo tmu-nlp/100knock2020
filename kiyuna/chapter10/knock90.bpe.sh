@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eu
-<< __EOF__
+<<__EOF__
 90. データの準備
 機械翻訳のデータセットをダウンロードせよ．
 訓練データ，開発データ，評価データを整形し，必要に応じてトークン化などの前処理を行うこと．
@@ -26,10 +26,10 @@ __EOF__
 
 mkdir -p data
 pushd data
-    if ! [ -d kftt-data-1.0 ]; then
-        wget http://www.phontron.com/kftt/download/kftt-data-1.0.tar.gz
-        tar -zxvf kftt-data-1.0.tar.gz
-    fi
+if ! [ -d kftt-data-1.0 ]; then
+    wget http://www.phontron.com/kftt/download/kftt-data-1.0.tar.gz
+    tar -zxvf kftt-data-1.0.tar.gz
+fi
 popd
 
 SRC=data/kftt-data-1.0/data/tok
@@ -41,12 +41,12 @@ BPE_CODE=$DST/code
 if ! [ -f $BPE_CODE ]; then
     echo "learn_bpe.py"
     mkdir -p $DST
-    cat $SRC/kyoto-train.ja $SRC/kyoto-train.en > $SRC/kyoto-train.ja-en
-    python $BPEROOT/learn_bpe.py -s $BPE_TOKENS < $SRC/kyoto-train.ja-en > $BPE_CODE
+    cat $SRC/kyoto-train.ja $SRC/kyoto-train.en >$SRC/kyoto-train.ja-en
+    python $BPEROOT/learn_bpe.py -s $BPE_TOKENS <$SRC/kyoto-train.ja-en >$BPE_CODE
     echo "apply_bpe.py"
-    for file in `find $SRC -type f`; do
-        echo `basename $file`
-        python $BPEROOT/apply_bpe.py -c $BPE_CODE < $file > $DST/`basename $file`
+    for file in $(find $SRC -type f); do
+        echo $(basename $file)
+        python $BPEROOT/apply_bpe.py -c $BPE_CODE <$file >$DST/$(basename $file)
     done
 fi
 
