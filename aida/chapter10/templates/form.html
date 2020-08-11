@@ -1,0 +1,21 @@
+<!doctype htnl>
+<html>
+<head>
+  <title>Machine Translation</title>
+</head>
+<body>
+  <h2>Please enter japanese sentence:</h2>
+
+  {% from "_formhelpers.html" import render_field %}
+
+  <form method=post action="/results">
+    <dl>
+      {{ render_field(form.inputsent, cols='30', rows='10') }}
+    </dl>
+    <div>
+      <input type=submit value='Translate' name='submit_btn'>
+    </div>
+  </form>
+</body>
+</html>
+
