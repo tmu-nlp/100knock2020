@@ -1,7 +1,12 @@
-# 以下のファイルを用意した．
-# kftt-data-1.0/data/tok/kyoto-train.cln.ja
-# kftt-data-1.0/data/tok/kyoto-train.cln.en
-# kftt-data-1.0/data/tok/kyoto-dev.ja
-# kftt-data-1.0/data/tok/kyoto-dev.en
-# kftt-data-1.0/data/tok/kyoto-test.ja
-# kftt-data-1.0/data/tok/kyoto-test.en
+# 前処理
+import MeCab
+tagger = MeCab.Tagger("-Owakati")
+
+# ファイルを開く
+file = open("kyoto-test.en", "r", encoding="utf-8")
+# 内容を全て読み込む
+contents = file.read()
+
+result = tagger.parse(contents)
+
+print(result)

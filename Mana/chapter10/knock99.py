@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators
-from fairseq.models.transformer import TransformerModel
+import subprocess
 
-
-# pytorch fairseqができるならこれで動く気がするが...
-# うまくできるか？
+# subprocess moduleを用いてCLIを使用する。
+# subprocessは空白の部分をカンマにして記述。
+# gpuを使う方法が謎だったので --cpu を指定。
+# 標準出力が大量に出てくるのでsplitを駆使してDのところのみ出す。
+# サーバーは表示されているものではなく計算機アドレス+ポートになっている。
 
 app = Flask(__name__)
 
@@ -18,16 +20,11 @@ def index():
 
 @app.route('/trans', methods=['POST'])
 def trans():
-    ja2en = TransformerModel.from_pretrained('/path/to/checkpoints',
-    checkpoint_file='checkpoint_best.pt',
-    data_name_or_path='data-bin/wmt17_zh_en_full',
-    bpe='subword_nmt',
-    bpe_codes='data-bin/wmt17_zh_en_full/zh.code'
-    )
     form = TransForm(request.form)
     if request.method == 'POST' and form.validate():
         name = request.form['entersent']
-        name = ja2en.translate(name)
+        cp = subprocess.run(['fairseq-interactive', '--cpu', 'data-bin/kftt.ja-en', '--path', 'save95/checkpoint_best.pt'], input=name, encoding='UTF-8', stdout=subprocess.PIPE)
+        name = cp.stdout.split("\n")[-3].split("\t")[2]
         return render_template('translated.html', name=name)
     return render_template('app.html', form=form)
 
