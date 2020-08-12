@@ -7,9 +7,9 @@ SRC=data/kftt-data-1.0/data/tok
 DST=data/kftt-data-1.0/data/mini
 
 mkdir -p $DST
-for file in `find $SRC -type f`; do
-    echo `basename $file`
-    head $file -n 300 > $DST/`basename $file`
+for file in $(find $SRC -type f); do
+    echo $(basename $file)
+    head $file -n 300 >$DST/$(basename $file)
 done
 
 EXP_NAME=KFTT.mini.ja-en
