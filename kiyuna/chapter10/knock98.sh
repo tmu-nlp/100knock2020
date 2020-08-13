@@ -11,7 +11,8 @@ set -eu
 # Docker
 docker pull morinoseimorizo/jparacrawl-fairseq
 HOST_DIR=/clwork/tomoshige/_playground/kiyuna/chapter10
-docker run -it --gpus 5 -v $HOST_DIR:/host_disk morinoseimorizo/jparacrawl-fairseq bash
+docker run -it --gpus all -v $HOST_DIR:/host_disk morinoseimorizo/jparacrawl-fairseq bash
+# docker run -it --gpus '"device=7"' -v $HOST_DIR:/host_disk morinoseimorizo/jparacrawl-fairseq bash
 
 # Prepare the data
 cd /host_disk
@@ -28,4 +29,7 @@ nohup ./fine-tune_kftt_fp32.sh 1 &> fine-tune.log
 
 # Evaluation
 cat models/fine-tune/test.log
+
+# Result
+BLEU+case.mixed+numrefs.1+smooth.exp+tok.intl+version.1.4.2 = 26.0 56.8/31.1/19.6/13.1 (BP = 1.000 ratio = 1.008 hyp_len = 28022 ref_len = 27790)
 __EOF__

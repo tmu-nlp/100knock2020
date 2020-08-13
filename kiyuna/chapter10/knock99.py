@@ -7,11 +7,13 @@
 - https://ymgsapo.com/2019/09/24/flask-board-app/
 
 [Usage]
-python knock99.py
+python knock99.py 7
 """
-from flask import Flask, redirect, render_template, request, session
 import subprocess
+import sys
+
 import MeCab
+from flask import Flask, redirect, render_template, request, session
 
 app = Flask(__name__)
 app.secret_key = "secret key"
@@ -19,7 +21,7 @@ app.secret_key = "secret key"
 user_data = {}
 user_message = []
 
-GPU = 3
+GPU = sys.argv[1]
 EXP_NAME = "KFTT.bpe.ja-en"
 BPE_CODE = "data/kftt-data-1.0/data/bpe/code"
 
@@ -32,14 +34,15 @@ tagger = MeCab.Tagger("-Owakati")
 
 cnt = 0
 
+
 def translate(line):
-    proc = subprocess.Popen(cmd, 
-            stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=True, encoding="utf8"
-        )
+    proc = subprocess.Popen(
+        cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=True, encoding="utf8"
+    )
     ja = tagger.parse(line)
     proc.stdin.write(ja)
     proc.stdin.close()
-    res = proc.stdout.readlines()[-3].split('\t')[-1]
+    res = proc.stdout.readlines()[-3].split("\t")[-1]
     return res
 
 

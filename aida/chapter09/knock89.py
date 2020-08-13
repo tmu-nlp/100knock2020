@@ -9,6 +9,18 @@ from transformers import BertModel, BertTokenizer
 
 from knock80 import obtain_data
 
+class BERTClassifier(torch.nn.Module):
+  def __init__(self, drop_rate, otuput_size):
+    super().__init__()
+    self.bert = BertModel.from_pretrained('bert-base-uncased')
+    self.drop = torch.nn.Dropout(drop_rate)
+    self.fc = torch.nn.Linear(768, otuput_size)
+
+  def forward(self, ids, mask):
+    _, out = self.bert(ids, attention_mask=mask)
+    out = self.fc(self.drop(out))
+    return out
+
 class CreateDataset(Dataset):
   def __init__(self, X, y, tokenizer, max_len):
     self.X = X
